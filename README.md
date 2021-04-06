@@ -1,6 +1,6 @@
 # vue3-element-admin
 
-🔥🔥🔥 基于 vite + vue3 + Vue-Router 4.0 + Vuex 4.0 + element-plus + typescript 的后台管理系统
+🎉 基于 vite + vue3 + Vue-Router 4.0 + Vuex 4.0 + element-plus + typescript 的后台管理系统
 
 ## 简介
 
@@ -16,7 +16,7 @@
 
 ```bash
 # 克隆项目
-git clone https://github.com/au1996/vue3-element-admin.git
+git clone https://github.com/au1996/vue3-element-admin-ts.git
 
 # 进入项目目录
 cd vue3-element-admin
@@ -63,3 +63,11 @@ npm run lint:css
 更多浏览器可以查看 [Can I Use Es Module](https://caniuse.com/?search=ES%20Module)
 
 [在线 Demo](http://admin.xueyueob.cn)
+
+[js版本传送门](https://github.com/au1996/vue3-element-admin)
+
+## License
+
+[MIT](https://github.com/au1996/vue3-element-admin-ts/blob/master/LICENSE)
+
+Copyright (c) 2021 雪月欧巴
