@@ -1,0 +1,46 @@
+<template>
+  <el-table :data="list" border style="width: 100%">
+    <el-table-column prop="username" label="用户名"> </el-table-column>
+    <el-table-column prop="password" label="密码"> </el-table-column>
+    <el-table-column prop="role" label="权限"> </el-table-column>
+    <el-table-column label="操作" width="200">
+      <template #default="{ row }">
+        <el-button type="text" size="small" @click="editUser(row)">编辑</el-button>
+        <el-button type="text" size="small" @click="deleteUser(row.username)">删除</el-button>
+      </template>
+    </el-table-column>
+  </el-table>
+</template>
+
+<script lang="ts" setup>
+import { reactive } from 'vue'
+import { getUserList } from '@/api/user'
+import { ElMessage, ElMessageBox } from 'element-plus'
+
+let list: Array<any> = reactive([])
+
+getUserList().then((res: any) => {
+  list.push(...res.list)
+})
+
+const editUser = (row: any) => {
+  ElMessage(row.username)
+}
+
+const deleteUser = (name: string) => {
+  ElMessageBox.confirm(`确定删除 ${name} ？`, '提示', {
+    confirmButtonText: '确认',
+    cancelButtonText: '取消',
+    cancelButtonClass: 'cancelBtn',
+    type: 'warning'
+  })
+    .then(() => {
+      const index = list.findIndex((o: any) => o.username === name)
+      list.splice(index, 1)
+      ElMessage.success('删除成功')
+    })
+    .catch(() => {})
+}
+</script>
+
+<style lang="scss" scoped></style>
