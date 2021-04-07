@@ -1,4 +1,4 @@
-# vue3-element-admin
+# vue3-element-admin-ts
 
 🎉 基于 vite + vue3 + Vue-Router 4.0 + Vuex 4.0 + element-plus + typescript 的后台管理系统
 
