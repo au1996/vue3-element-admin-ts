@@ -1,6 +1,5 @@
 import { ComponentCustomProperties } from 'vue'
 import { Store } from 'vuex'
-import { State } from '/@/store'
 
 declare interface IStateApp {
   device: string

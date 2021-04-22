@@ -8,6 +8,8 @@ node_modules
 .idea
 dist
 /public
+/tests/unit
+/__tests__
 /docs
 .husky
 .local

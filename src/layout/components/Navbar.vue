@@ -12,15 +12,15 @@
           <i class="el-icon-caret-bottom" />
         </div>
         <template #dropdown>
-          <el-dropdown-menu slot="dropdown" placement="top">
+          <el-dropdown-menu>
             <router-link to="/">
               <el-dropdown-item>首页</el-dropdown-item>
             </router-link>
             <el-dropdown-item divided>
-              <span style="display: block" @click="editPossword">修改密码</span>
+              <span style="display: block;" @click="editPossword">修改密码</span>
             </el-dropdown-item>
             <el-dropdown-item divided>
-              <span style="display: block" @click="loginOut">登出</span>
+              <span style="display: block;" @click="loginOut">登出</span>
             </el-dropdown-item>
           </el-dropdown-menu>
         </template>

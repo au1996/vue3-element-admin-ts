@@ -20,7 +20,7 @@ setInterval(() => {
 
 <style lang="scss" scoped>
 h2 {
-  text-align: center;
   color: v-bind('h2Style.color');
+  text-align: center;
 }
 </style>

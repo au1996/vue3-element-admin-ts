@@ -6,18 +6,22 @@
  */
 module.exports = {
   root: true, //禁用持续查找（root）
-  parserOptions: {
-    parser: 'babel-eslint', //解析器（parser）
-    sourceType: 'module' //指定源代码存在的位置，script | module，默认为script
-  },
   env: {
-    browser: true, //启用浏览器全局变量。
+    browser: true, // 启用浏览器全局变量。
     node: true, //Node.js全局变量和Node.js范围。
     es6: true // 启用ES6的功能。
   },
+  parserOptions: {
+    parser: '@typescript-eslint/parser', // 解析器（parser）
+    ecmaVersion: 2020, // ECMA版本
+    sourceType: 'module' //指定源代码存在的位置，script | module，默认为script
+  },
   // eslint:recommended:表示引入eslint的核心功能，并且报告一些常见的共同错误。
-  extends: ['plugin:vue/recommended', 'eslint:recommended'],
+  // extends: ['eslint:recommended', 'plugin:vue/recommended'],
+  // extends: ['eslint:recommended', 'plugin:vue/vue3-recommended', 'plugin:@typescript-eslint/recommended'],
+  extends: ['eslint:recommended', 'plugin:vue/vue3-recommended'],
   rules: {
+    'vue/html-self-closing': 0,
     // 设置每行最大属性数
     'vue/max-attributes-per-line': [
       2,
@@ -344,7 +348,14 @@ module.exports = {
     // 代码块前至少有一个空格
     'space-before-blocks': [2, 'always'],
     // 函数名称或 function 关键字与开头括号之间不允许有空格
-    'space-before-function-paren': [2, 'never'],
+    'space-before-function-paren': [
+      'error',
+      {
+        anonymous: 'always',
+        named: 'never',
+        asyncArrow: 'always'
+      }
+    ],
     // 禁止在括号内使用空格
     'space-in-parens': [2, 'never'],
     // 中缀运算符周围需有空格

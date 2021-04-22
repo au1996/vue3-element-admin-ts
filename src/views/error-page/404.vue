@@ -11,7 +11,7 @@
         <div class="bullshit__oops">OOPS!</div>
         <div class="bullshit__info">
           All rights reserved
-          <a style="color: #20a0ff" href="https://au1996.gitee.io/blog/" target="_blank">雪月</a>
+          <a style="color: #20a0ff;" href="https://au1996.gitee.io/blog/" target="_blank">雪月</a>
         </div>
         <div class="bullshit__headline">{{ message }}</div>
         <div class="bullshit__info">

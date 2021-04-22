@@ -93,14 +93,14 @@ export default defineComponent({
   position: absolute;
   top: 0;
   display: flex;
-  justify-content: center;
-  align-items: center;
   width: 100%;
   height: 50px;
   overflow: hidden;
   text-align: center;
-  background-color: #2b2f3a;
   cursor: pointer;
+  background-color: #2b2f3a;
+  justify-content: center;
+  align-items: center;
 
   .logoImg {
     width: 32px;

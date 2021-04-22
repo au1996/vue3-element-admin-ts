@@ -1,5 +1,5 @@
 <template>
-  <el-table :data="list" border style="width: 100%">
+  <el-table :data="list" border style="width: 100%;">
     <el-table-column prop="username" label="用户名"> </el-table-column>
     <el-table-column prop="password" label="密码"> </el-table-column>
     <el-table-column prop="role" label="权限"> </el-table-column>
@@ -16,7 +16,7 @@ import { reactive } from 'vue'
 import { ElMessage } from 'element-plus'
 import { getUserList } from '@/api/user'
 
-let list: Array<any> = reactive([])
+const list: Array<any> = reactive([])
 
 getUserList().then((res: any) => {
   list.push(...res.list)

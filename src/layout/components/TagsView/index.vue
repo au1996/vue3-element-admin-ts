@@ -113,7 +113,7 @@ export default defineComponent({
         const tagList = document.getElementsByClassName('tags-view-item')
         for (let i = 0, leng = list.length; i < leng; i++) {
           if (list[i].path === newVal.path) {
-            ;(this.$refs.scrollPane as any).moveToTarget(tagList[i])
+            (this.$refs.scrollPane as any).moveToTarget(tagList[i])
             // when query is different then update
             if (list[i].fullPath !== this.$route.fullPath) {
               this.$store.dispatch('tagsView/updateVisitedView', this.$route)
