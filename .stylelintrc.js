@@ -40,7 +40,7 @@ module.exports = {
     'property-no-unknown': [
       true,
       {
-        ignoreProperties: ['/^my-/']
+        ignoreProperties: ['/^$my-/']
       }
     ],
     'no-empty-source': null,

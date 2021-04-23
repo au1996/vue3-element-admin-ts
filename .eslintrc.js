@@ -17,7 +17,6 @@ module.exports = {
     sourceType: 'module' //指定源代码存在的位置，script | module，默认为script
   },
   // eslint:recommended:表示引入eslint的核心功能，并且报告一些常见的共同错误。
-  // extends: ['eslint:recommended', 'plugin:vue/recommended'],
   // extends: ['eslint:recommended', 'plugin:vue/vue3-recommended', 'plugin:@typescript-eslint/recommended'],
   extends: ['eslint:recommended', 'plugin:vue/vue3-recommended'],
   rules: {
