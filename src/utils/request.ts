@@ -1,6 +1,5 @@
 import axios from 'axios'
 import { ElMessage } from 'element-plus'
-import router from '../router'
 import { getToken, removeToken, removeRoles } from './auth'
 
 const service = axios.create({
@@ -28,7 +27,7 @@ service.interceptors.response.use(
     if (error.response && error.response.status === 401) {
       removeToken()
       removeRoles()
-      router.push('/login')
+      location.reload()
     }
     ElMessage({
       type: 'error',
