@@ -30,8 +30,26 @@ export default ({ command }: ConfigEnv): UserConfigExport => {
       port: 7001,
       open: false,
       proxy: {
-        '/api': 'http://admin.xueyueob.cn/api'
+        '/api': {
+          target: 'http://admin.xueyueob.cn/api',
+          changeOrigin: true,
+          ws: true,
+          rewrite: (path) => path.replace(new RegExp('^/api'), '')
+        }
       }
+    },
+    build: {
+      // sourcemap: true,
+      manifest: true,
+      rollupOptions: {
+        output: {
+          manualChunks: {
+            vue: ['vue', 'vue-router', 'vuex'],
+            'element-plus': ['element-plus']
+          }
+        }
+      },
+      chunkSizeWarningLimit: 500
     }
   }
 }

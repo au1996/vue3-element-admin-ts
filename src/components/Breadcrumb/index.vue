@@ -37,7 +37,7 @@ export default defineComponent({
 
       if (!this.isDashboard(first)) {
         const nav: any = {
-          path: '/dashboard',
+          path: '/home',
           meta: {
             title: '首页'
           }
@@ -52,7 +52,7 @@ export default defineComponent({
       if (!name) {
         return false
       }
-      return name.trim().toLocaleLowerCase() === 'Dashboard'.toLocaleLowerCase()
+      return name.trim().toLocaleLowerCase() === 'Home'.toLocaleLowerCase()
     }
   }
 })
