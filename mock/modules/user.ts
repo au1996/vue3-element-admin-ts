@@ -1,53 +1,105 @@
 import { MockMethod } from 'vite-plugin-mock'
 
 const userList = [
-  { username: 'admin', password: '123', role: 'admin' },
-  { username: 'editor', password: '456', role: 'editor' },
-  { username: 'xueyue', password: '123456', role: 'admin' }
+  {
+    username: 'admin',
+    password: '123',
+    role: 'admin',
+    introduction: '管理员',
+    avatar: 'https://www.xueyueob.cn/cube/cube01.bmp',
+    email: 'admin@qq.com',
+    createTime: 1623318878699
+  },
+  {
+    username: 'editor',
+    password: '456',
+    role: 'editor',
+    introduction: '搬砖码农',
+    avatar: 'https://www.xueyueob.cn/cube/cube02.bmp',
+    email: 'editor@qq.com',
+    createTime: 1623328878699
+  },
+  {
+    username: 'xueyue',
+    password: '123456',
+    role: 'admin',
+    introduction: '否定先生',
+    avatar: 'http://www.xueyueob.cn/icons/favicon.ico',
+    email: 'xueyue@qq.com',
+    createTime: 1625213469913
+  }
 ]
 
-export default [
+const roleList = [
+  { name: 'admin', description: '管理员', level: 0 },
+  { name: 'editor', description: '编辑人员', level: 1 }
+]
+
+const userMockList: MockMethod[] = [
   {
     url: '/api/login',
     method: 'post',
     timeout: 1000,
     statusCode: 200,
-    response: ({ body }) => {
-      let flag = false
-      let role = ''
-      userList.forEach((item) => {
+    response: ({ body }: any) => {
+      let flag = -1
+      userList.forEach((item, index) => {
         if (item.username === body.username && item.password === body.password) {
-          flag = true
-          role = item.role
+          flag = index
         }
       })
-      if (flag) {
-        return {
-          code: 200,
+      if (~flag) {
+        const data = {
+          code: 20000,
           message: '登录成功',
-          role,
-          token: new Date().getTime().toString(32)
+          token: new Date().getTime().toString(32),
+          ...userList[flag]
         }
+        return data
       } else {
         return {
-          code: 400,
+          code: 40000,
           message: '用户名或密码错误'
         }
       }
     }
   },
   {
-    url: '/api/user-list',
+    url: '/api/logout',
     method: 'get',
-    timeout: 100,
-    statusCode: 200,
+    response: ({ query }: any) => {
+      return {
+        code: 20000,
+        message: 'success',
+        data: query
+      }
+    }
+  },
+  {
+    url: '/api/users',
+    method: 'get',
+    timeout: 500,
     response: () => {
       const list = userList
       return {
-        code: 200,
+        code: 20000,
+        message: 'success',
+        list
+      }
+    }
+  },
+  {
+    url: '/api/roles',
+    method: 'get',
+    response: () => {
+      const list = roleList
+      return {
+        code: 20000,
         message: 'success',
         list
       }
     }
   }
-] as MockMethod[]
+]
+
+export default userMockList

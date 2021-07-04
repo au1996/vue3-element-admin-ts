@@ -1,11 +1,13 @@
-import { resolve } from 'path'
 import { UserConfigExport, ConfigEnv } from 'vite'
 import { viteMockServe } from 'vite-plugin-mock'
+import { resolve } from 'path'
 import vue from '@vitejs/plugin-vue'
 
 // https://vitejs.dev/config/
 export default ({ command }: ConfigEnv): UserConfigExport => {
+  const root = process.cwd()
   return {
+    root,
     base: '/', // 开发或生产环境服务的 公共基础路径。
     plugins: [
       vue(),
@@ -22,12 +24,12 @@ export default ({ command }: ConfigEnv): UserConfigExport => {
     ],
     resolve: {
       alias: {
-        '@': resolve('./src'),
-        '@img': resolve('./src/assets/img')
+        '@': resolve(process.cwd(), '/src'),
+        '#': resolve(process.cwd(), '/types')
       }
     },
     server: {
-      port: 7001,
+      port: 3001,
       open: false,
       proxy: {
         '/api': {

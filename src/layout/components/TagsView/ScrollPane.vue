@@ -6,7 +6,6 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue'
-const tagAndTagSpacing = 4
 
 export default defineComponent({
   name: 'ScrollPane',
@@ -15,7 +14,8 @@ export default defineComponent({
   },
   data() {
     return {
-      left: 0
+      left: 0,
+      tagAndTagSpacing: 4
     }
   },
   computed: {
@@ -64,10 +64,10 @@ export default defineComponent({
         const nextTag = tagList[currentIndex + 1]
 
         // the tag's offsetLeft after of nextTag
-        const afterNextTagOffsetLeft = nextTag.offsetLeft + nextTag.offsetWidth + tagAndTagSpacing
+        const afterNextTagOffsetLeft = nextTag.offsetLeft + nextTag.offsetWidth + this.tagAndTagSpacing
 
         // the tag's offsetLeft before of prevTag
-        const beforePrevTagOffsetLeft = prevTag.offsetLeft - tagAndTagSpacing
+        const beforePrevTagOffsetLeft = prevTag.offsetLeft - this.tagAndTagSpacing
 
         if (afterNextTagOffsetLeft > $scrollWrapper.scrollLeft + $containerWidth) {
           $scrollWrapper.scrollLeft = afterNextTagOffsetLeft - $containerWidth

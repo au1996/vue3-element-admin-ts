@@ -2,7 +2,7 @@
   <div class="login-wrap">
     <div class="login-content">
       <div class="login-title">系统登录</div>
-      <el-form ref="loginRef" class="login-form" :model="param" :rules="rules" status-icon>
+      <el-form ref="loginFormRef" class="login-form" :model="param" :rules="rules" status-icon>
         <el-form-item prop="username">
           <el-input v-model="param.username" clearable placeholder="用户名">
             <template #prepend>
@@ -11,9 +11,16 @@
           </el-input>
         </el-form-item>
         <el-form-item prop="password">
-          <el-input v-model="param.password" clearable placeholder="密码" type="password" @keyup.enter="submitForm">
+          <el-input
+            v-model="param.password"
+            clearable
+            placeholder="密码"
+            :type="passwordType"
+            @keyup.enter="submitForm"
+          >
             <template #prepend>
-              <i class="el-icon-lock" />
+              <i v-show="passwordLock" class="el-icon-lock" @click="switchPass" />
+              <i v-show="!passwordLock" class="el-icon-unlock" @click="switchPass" />
             </template>
           </el-input>
         </el-form-item>
@@ -30,15 +37,17 @@
 <script lang="ts" setup>
 import { ref, reactive } from 'vue'
 import { useRouter } from 'vue-router'
+import { useStore } from 'vuex'
 import { ElMessage } from 'element-plus'
-import { setToken, setRoles } from '@/utils/auth'
 import { validate } from '@/utils/formExtend'
-import { login } from '@/api/user'
 
 const router = useRouter()
+const store = useStore()
 
 const btnLoading = ref(false)
-const loginRef = ref(null)
+const loginFormRef = ref(null)
+const passwordLock = ref(true)
+const passwordType = ref('password')
 
 const param = reactive({
   username: '',
@@ -50,22 +59,24 @@ const rules = reactive({
   password: [{ required: true, message: '请输入密码', trigger: 'blur' }]
 })
 
+const switchPass = () => {
+  if (passwordLock.value) {
+    passwordType.value = 'text'
+  } else {
+    passwordType.value = 'password'
+  }
+  passwordLock.value = !passwordLock.value
+}
+
 const submitForm = async () => {
-  const valid = await validate(loginRef)
+  const valid = await validate(loginFormRef)
   if (valid) {
     btnLoading.value = true
     // 访问登录接口
-    login(param)
-      .then((res: any) => {
-        if (res.code === 200) {
-          // 登录成功后；保存用户信息以及token
-          ElMessage.success(res.message)
-          setToken(res.token)
-          setRoles(res.role)
-          router.push('/')
-        } else {
-          ElMessage.error(res.message)
-        }
+    store
+      .dispatch('user/login', param)
+      .then(() => {
+        router.push('/')
       })
       .finally(() => {
         btnLoading.value = false

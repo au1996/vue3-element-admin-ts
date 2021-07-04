@@ -5,7 +5,10 @@ declare interface Window {
   __APP__: App<Element>
 }
 
-declare module '*.png' {
-  const value: string
-  export = value
+declare module '*.vue' {
+  import { defineComponent } from 'vue'
+  const component: ReturnType<typeof defineComponent>
+  export default component
 }
+
+declare module '*.png'

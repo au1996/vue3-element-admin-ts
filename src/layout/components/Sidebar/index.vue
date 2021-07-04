@@ -1,9 +1,9 @@
 <template>
   <div class="sidebar-container">
     <div class="logo" @click="$router.push('/')">
-      <img class="logoImg" :src="logoSrc" alt="logo" />
+      <img class="logo-img" src="/img/logo.png" alt="logo" />
       <transition name="el-zoom-in-center">
-        <h1 v-show="sidebar.opened" class="logoText">Vue Element Admin</h1>
+        <h1 v-show="opened" class="logo-text">Vue Element Admin</h1>
       </transition>
     </div>
     <el-scrollbar wrap-class="scrollbar-wrapper">
@@ -17,75 +17,64 @@
         background-color="#4a5a74"
         active-text-color="#409EFF"
       >
-        <sidebar-item v-for="item in routers" :key="item.path" :index="item.path" :item="item" />
+        <SidebarItem v-for="item in routerList" :key="item.path" :index="item.path" :nav="item" />
       </el-menu>
     </el-scrollbar>
   </div>
 </template>
 
-<script lang="ts">
-import { defineComponent } from 'vue'
+<script lang="ts" setup>
+import { reactive, computed, onMounted } from 'vue'
+import { useStore } from 'vuex'
 import { constantRoutes } from '@/router'
 import { getRoles } from '@/utils/auth'
 import SidebarItem from './SidebarItem.vue'
-import logoSrc from '@img/logo.png'
 
-export default defineComponent({
-  components: { SidebarItem },
-  data() {
-    return {
-      routers: [] as any,
-      logoSrc: logoSrc
+const roles = getRoles()
+const store = useStore()
+const routerList: Array<any> = reactive([])
+
+const opened = computed(() => store.state.app.sidebar.opened)
+const isCollapse = computed(() => !opened.value)
+
+onMounted(() => {
+  filterRoutes()
+})
+
+/**
+ * 权限过滤路由
+ */
+const filterRoutes = () => {
+  constantRoutes.forEach((item) => {
+    if (item.path === '/') {
+      routerList.push(...item.children)
     }
-  },
-  computed: {
-    sidebar() {
-      return this.$store.state.app.sidebar
-    },
-    isCollapse() {
-      return !this.$store.state.app.sidebar.opened
-    }
-  },
-  mounted() {
-    this.routers = this.filterRoutes()
-  },
-  methods: {
-    // 路由过滤
-    filterRoutes(): any {
-      const roles = getRoles()
-      const routes: any = []
-      for (let i = 0; i < constantRoutes.length; i++) {
-        if (constantRoutes[i].path === '/') {
-          routes.push(...(constantRoutes[i].children as any))
-        }
-      }
-      // 权限过滤
-      for (let i = 0; i < routes.length; i++) {
-        if (routes[i].meta && routes[i].meta.roles && !routes[i].meta.roles.includes(roles)) {
-          routes.splice(i, 1)
-          i--
-        }
-      }
-      for (let i = 0; i < routes.length; i++) {
-        const childrens: any = []
-        if (routes[i].children) {
-          for (let j = 0; j < routes[i].children.length; j++) {
-            // 权限过滤
-            const childs = routes[i].children[j]
-            if (
-              (childs.meta && !childs.meta.roles) ||
-              (childs.meta && childs.meta.roles && childs.meta.roles.includes(roles))
-            ) {
-              childrens.push(childs)
-            }
-          }
-          routes[i].children = [...childrens]
-        }
-      }
-      return routes
+  })
+  for (let i = 0; i < routerList.length; i++) {
+    if (routerList[i].meta && routerList[i].meta.roles && !routerList[i].meta.roles.includes(roles)) {
+      routerList.splice(i, 1)
+      i--
     }
   }
-})
+  filterChildrens(routerList)
+}
+
+/**
+ * 权限过滤子路由
+ */
+const filterChildrens = (routers: any) => {
+  const childrens: Array<any> = []
+  routers.forEach((item: any) => {
+    if ((item.meta && !item.meta.roles) || (item.meta && item.meta.roles && item.meta.roles.includes(roles))) {
+      childrens.push(item)
+      if (item.children) {
+        filterChildrens(item.children)
+      }
+    }
+  })
+  routers.length = 0
+  routers.push(...childrens)
+}
 </script>
 
 <style lang="scss" scoped="scoped">
@@ -102,12 +91,12 @@ export default defineComponent({
   justify-content: center;
   align-items: center;
 
-  .logoImg {
+  .logo-img {
     width: 32px;
     height: 32px;
   }
 
-  .logoText {
+  .logo-text {
     display: inline-block;
     height: 50px;
     margin-left: 12px;

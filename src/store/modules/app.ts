@@ -1,7 +1,7 @@
 import Cookies from 'js-cookie'
 import { IStateApp } from '#/store'
 
-const state = {
+const state: IStateApp = {
   device: 'desktop',
   size: Cookies.get('size') || 'medium',
   sidebar: {

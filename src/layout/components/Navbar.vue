@@ -1,27 +1,21 @@
 <template>
   <el-menu class="navbar" mode="horizontal">
-    <Hamburger class="hamburger-container" :is-active="sidebar.opened" @toggleClick="toggleSideBar" />
+    <Hamburger class="hamburger-container" :is-active="opened" @toggleClick="toggleSideBar" />
     <Breadcrumb class="breadcrumb-container" />
     <div class="right-menu">
       <el-tooltip effect="dark" content="全屏" placement="bottom">
         <Screenfull class="screenfull" />
       </el-tooltip>
-      <el-dropdown class="avatar-container right-menu-item" trigger="hover">
+      <el-dropdown class="avatar-container right-menu-item">
         <div class="avatar-wrapper">
-          <img src="http://www.xueyueob.cn/icons/favicon.ico" class="user-avatar" />
+          <img :src="avatar ? avatar : '/img/logo.png'" class="user-avatar" />
           <i class="el-icon-caret-bottom" />
         </div>
         <template #dropdown>
           <el-dropdown-menu>
-            <router-link to="/">
-              <el-dropdown-item>首页</el-dropdown-item>
-            </router-link>
-            <el-dropdown-item divided>
-              <span style="display: block;" @click="editPossword">修改密码</span>
-            </el-dropdown-item>
-            <el-dropdown-item divided>
-              <span style="display: block;" @click="loginOut">登出</span>
-            </el-dropdown-item>
+            <el-dropdown-item @click="$router.push('/')">首页</el-dropdown-item>
+            <el-dropdown-item divided @click="editPossword">修改密码</el-dropdown-item>
+            <el-dropdown-item divided @click="loginOut">登出</el-dropdown-item>
           </el-dropdown-menu>
         </template>
       </el-dropdown>
@@ -29,61 +23,41 @@
   </el-menu>
 </template>
 
-<script lang="ts">
-import { defineComponent } from 'vue'
+<script lang="ts" setup>
+import { computed } from 'vue'
+import { useRouter } from 'vue-router'
+import { useStore } from 'vuex'
 import { ElMessage, ElMessageBox } from 'element-plus'
 import Hamburger from '@/components/Hamburger/index.vue'
 import Breadcrumb from '@/components/Breadcrumb/index.vue'
 import Screenfull from '@/components/Screenfull/index.vue'
-import { removeToken, removeRoles } from '@/utils/auth'
 
-export default defineComponent({
-  components: {
-    Breadcrumb,
-    Hamburger,
-    Screenfull
-  },
-  data() {
-    return {
-      status: false
-    }
-  },
-  computed: {
-    sidebar() {
-      return this.$store.state.app.sidebar
-    },
-    name() {
-      return localStorage.name
-    }
-  },
-  methods: {
-    close() {
-      this.status = false
-    },
-    toggleSideBar() {
-      this.$store.dispatch('app/toggleSideBar')
-    },
-    editPossword() {
-      ElMessage.warning('暂不支持修改密码')
-    },
-    loginOut() {
-      ElMessageBox.confirm('退出登录', '提示', {
-        confirmButtonText: '确认',
-        cancelButtonText: '取消',
-        cancelButtonClass: 'cancelBtn',
-        type: 'warning'
+const router = useRouter()
+const store = useStore()
+const opened = computed(() => store.state.app.sidebar.opened)
+const avatar = computed(() => store.state.user.avatar)
+
+const toggleSideBar = () => {
+  store.dispatch('app/toggleSideBar')
+}
+
+const editPossword = () => {
+  ElMessage.warning('请联系管理员')
+}
+
+const loginOut = () => {
+  ElMessageBox.confirm('退出登录', '提示', {
+    confirmButtonText: '确认',
+    cancelButtonText: '取消',
+    type: 'warning'
+  })
+    .then(() => {
+      store.dispatch('user/logout').then(() => {
+        router.push('/login')
       })
-        .then(() => {
-          removeToken()
-          removeRoles()
-          this.$store.dispatch('tagsView/delAllViews').then(() => {
-            this.$router.push('/login')
-          })
-        })
-        .catch(() => {})
-    }
-  }
-})
+    })
+    .catch(() => {})
+}
 </script>
 
 <style lang="scss" scoped>

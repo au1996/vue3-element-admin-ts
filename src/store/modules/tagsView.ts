@@ -1,10 +1,21 @@
-const state = {
+import { IStateTagsView } from '#/store'
+
+type View = {
+  name?: string
+  path: string
+  meta: {
+    title?: string
+    noCache?: boolean
+  }
+}
+
+const state: IStateTagsView = {
   visitedViews: [],
   cachedViews: []
 }
-
+// { path: any; meta: { title: any } }
 const mutations = {
-  ADD_VISITED_VIEW: (state: { visitedViews: any[] }, view: { path: any; meta: { title: any } }) => {
+  ADD_VISITED_VIEW: (state: IStateTagsView, view: View) => {
     if (state.visitedViews.some((v: { path: any }) => v.path === view.path)) return
     state.visitedViews.push(
       Object.assign({}, view, {
@@ -12,14 +23,14 @@ const mutations = {
       })
     )
   },
-  ADD_CACHED_VIEW: (state: { cachedViews: any[] }, view: { name: any; meta: { noCache: any } }) => {
+  ADD_CACHED_VIEW: (state: IStateTagsView, view: View) => {
     if (state.cachedViews.includes(view.name)) return
     if (!view.meta.noCache) {
       state.cachedViews.push(view.name)
     }
   },
 
-  DEL_VISITED_VIEW: (state: { visitedViews: any[] }, view: { path: any }) => {
+  DEL_VISITED_VIEW: (state: IStateTagsView, view: View) => {
     for (const [i, v] of state.visitedViews.entries()) {
       if (v.path === view.path) {
         state.visitedViews.splice(i, 1)
@@ -27,7 +38,7 @@ const mutations = {
       }
     }
   },
-  DEL_CACHED_VIEW: (state: { cachedViews: any[] }, view: { name: any }) => {
+  DEL_CACHED_VIEW: (state: IStateTagsView, view: View) => {
     for (const i of state.cachedViews) {
       if (i === view.name) {
         const index = state.cachedViews.indexOf(i)
@@ -37,12 +48,12 @@ const mutations = {
     }
   },
 
-  DEL_OTHERS_VISITED_VIEWS: (state: { visitedViews: any[] }, view: { path: any }) => {
+  DEL_OTHERS_VISITED_VIEWS: (state: IStateTagsView, view: View) => {
     state.visitedViews = state.visitedViews.filter((v: { meta: { affix: any }; path: any }) => {
       return v.meta.affix || v.path === view.path
     })
   },
-  DEL_OTHERS_CACHED_VIEWS: (state: { cachedViews: string | any[] }, view: { name: any }) => {
+  DEL_OTHERS_CACHED_VIEWS: (state: { cachedViews: string | any[] }, view: View) => {
     for (const i of state.cachedViews) {
       if (i === view.name) {
         const index = state.cachedViews.indexOf(i)
@@ -52,16 +63,16 @@ const mutations = {
     }
   },
 
-  DEL_ALL_VISITED_VIEWS: (state: { visitedViews: any[] }) => {
+  DEL_ALL_VISITED_VIEWS: (state: IStateTagsView) => {
     // keep affix tags
     const affixTags = state.visitedViews.filter((tag: { meta: { affix: any } }) => tag.meta.affix)
     state.visitedViews = affixTags
   },
-  DEL_ALL_CACHED_VIEWS: (state: { cachedViews: any[] }) => {
+  DEL_ALL_CACHED_VIEWS: (state: IStateTagsView) => {
     state.cachedViews = []
   },
 
-  UPDATE_VISITED_VIEW: (state: { visitedViews: any }, view: { path: any }) => {
+  UPDATE_VISITED_VIEW: (state: IStateTagsView, view: View) => {
     for (let v of state.visitedViews) {
       if (v.path === view.path) {
         v = Object.assign(v, view)
@@ -72,18 +83,18 @@ const mutations = {
 }
 
 const actions = {
-  addView({ dispatch }: any, view: any) {
+  addView({ dispatch }: any, view: View) {
     dispatch('addVisitedView', view)
     dispatch('addCachedView', view)
   },
-  addVisitedView({ commit }: any, view: any) {
+  addVisitedView({ commit }: any, view: View) {
     commit('ADD_VISITED_VIEW', view)
   },
-  addCachedView({ commit }: any, view: any) {
+  addCachedView({ commit }: any, view: View) {
     commit('ADD_CACHED_VIEW', view)
   },
 
-  delView({ dispatch, state }: any, view: any) {
+  delView({ dispatch, state }: any, view: View) {
     return new Promise((resolve) => {
       dispatch('delVisitedView', view)
       dispatch('delCachedView', view)
@@ -93,20 +104,20 @@ const actions = {
       })
     })
   },
-  delVisitedView({ commit, state }: any, view: any) {
+  delVisitedView({ commit, state }: any, view: View) {
     return new Promise((resolve) => {
       commit('DEL_VISITED_VIEW', view)
       resolve([...state.visitedViews])
     })
   },
-  delCachedView({ commit, state }: any, view: any) {
+  delCachedView({ commit, state }: any, view: View) {
     return new Promise((resolve) => {
       commit('DEL_CACHED_VIEW', view)
       resolve([...state.cachedViews])
     })
   },
 
-  delOthersViews({ dispatch, state }: any, view: any) {
+  delOthersViews({ dispatch, state }: any, view: View) {
     return new Promise((resolve) => {
       dispatch('delOthersVisitedViews', view)
       dispatch('delOthersCachedViews', view)
@@ -116,20 +127,20 @@ const actions = {
       })
     })
   },
-  delOthersVisitedViews({ commit, state }: any, view: any) {
+  delOthersVisitedViews({ commit, state }: any, view: View) {
     return new Promise((resolve) => {
       commit('DEL_OTHERS_VISITED_VIEWS', view)
       resolve([...state.visitedViews])
     })
   },
-  delOthersCachedViews({ commit, state }: any, view: any) {
+  delOthersCachedViews({ commit, state }: any, view: View) {
     return new Promise((resolve) => {
       commit('DEL_OTHERS_CACHED_VIEWS', view)
       resolve([...state.cachedViews])
     })
   },
 
-  delAllViews({ dispatch, state }: any, view: any) {
+  delAllViews({ dispatch, state }: any, view: View) {
     return new Promise((resolve) => {
       dispatch('delAllVisitedViews', view)
       dispatch('delAllCachedViews', view)
@@ -152,7 +163,7 @@ const actions = {
     })
   },
 
-  updateVisitedView({ commit }: any, view: any) {
+  updateVisitedView({ commit }: any, view: View) {
     commit('UPDATE_VISITED_VIEW', view)
   }
 }

@@ -1,4 +1,5 @@
 import { asyncRoutes, constantRoutes } from '@/router'
+import { IStatePermission } from '#/store'
 
 /**
  * Use meta.role to determine if the current user has permission
@@ -34,13 +35,13 @@ export function filterAsyncRoutes(routes: any, roles: any) {
   return res
 }
 
-const state = {
+const state: IStatePermission = {
   routes: [],
   addRoutes: []
 }
 
 const mutations = {
-  SET_ROUTES: (state: any, routes: any) => {
+  SET_ROUTES: (state: IStatePermission, routes: any) => {
     state.addRoutes = routes
     state.routes = constantRoutes.concat(routes)
   }
