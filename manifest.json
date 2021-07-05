@@ -1,6 +1,6 @@
 {
   "index.html": {
-    "file": "assets/index.183985a1.js",
+    "file": "assets/index.d13ac534.js",
     "src": "index.html",
     "isEntry": true,
     "imports": [
@@ -23,7 +23,7 @@
       "src/views/xueyue/index.vue"
     ],
     "css": [
-      "assets/index.0a8fc8fc.css"
+      "assets/index.caf26551.css"
     ],
     "assets": [
       "assets/element-icons.9c88a535.woff",
@@ -40,7 +40,7 @@
     ]
   },
   "src/views/login/index.vue": {
-    "file": "assets/index.32e5ee17.js",
+    "file": "assets/index.90bd1cdd.js",
     "src": "src/views/login/index.vue",
     "isDynamicEntry": true,
     "imports": [
@@ -48,11 +48,11 @@
       "_element-plus.e1d07649.js"
     ],
     "css": [
-      "assets/index.8556a356.css"
+      "assets/index.ab870ba5.css"
     ]
   },
   "src/views/error-page/404.vue": {
-    "file": "assets/404.8819dec8.js",
+    "file": "assets/404.cd23e5b2.js",
     "src": "src/views/error-page/404.vue",
     "isDynamicEntry": true,
     "imports": [
@@ -63,7 +63,7 @@
     ]
   },
   "src/views/error-page/401.vue": {
-    "file": "assets/401.6d3cb971.js",
+    "file": "assets/401.96f92d02.js",
     "src": "src/views/error-page/401.vue",
     "isDynamicEntry": true,
     "imports": [
@@ -74,7 +74,7 @@
     ]
   },
   "src/layout/index.vue": {
-    "file": "assets/index.7973357d.js",
+    "file": "assets/index.dee4a106.js",
     "src": "src/layout/index.vue",
     "isDynamicEntry": true,
     "imports": [
@@ -98,7 +98,7 @@
     ]
   },
   "src/views/setting/setting.vue": {
-    "file": "assets/setting.3ddd1989.js",
+    "file": "assets/setting.0bcce438.js",
     "src": "src/views/setting/setting.vue",
     "isDynamicEntry": true,
     "imports": [
@@ -159,11 +159,14 @@
     ]
   },
   "src/views/xueyue/index.vue": {
-    "file": "assets/index.ab863379.js",
+    "file": "assets/index.5b5b76f2.js",
     "src": "src/views/xueyue/index.vue",
     "isDynamicEntry": true,
     "imports": [
       "_vue.02be1a88.js"
+    ],
+    "css": [
+      "assets/index.cdcbb2d8.css"
     ]
   }
 }
