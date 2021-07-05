@@ -8,7 +8,7 @@ export default ({ command }: ConfigEnv): UserConfigExport => {
   const root = process.cwd()
   return {
     root,
-    base: '/', // 开发或生产环境服务的 公共基础路径。
+    base: command === 'serve' ? '/' : '/vue3-element-admin/',
     plugins: [
       vue(),
       viteMockServe({
@@ -26,6 +26,13 @@ export default ({ command }: ConfigEnv): UserConfigExport => {
       alias: {
         '@': resolve(process.cwd(), '/src'),
         '#': resolve(process.cwd(), '/types')
+      }
+    },
+    css: {
+      preprocessorOptions: {
+        scss: {
+          additionalData: `@import "./src/styles/variables.scss";`
+        }
       }
     },
     server: {
