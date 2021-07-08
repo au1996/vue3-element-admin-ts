@@ -1,4 +1,4 @@
-import { createRouter, createWebHistory, RouteRecordRaw } from 'vue-router'
+import { createRouter, createWebHashHistory, RouteRecordRaw } from 'vue-router'
 
 export const constantRoutes: Array<RouteRecordRaw> = [
   {
@@ -94,7 +94,7 @@ export const constantRoutes: Array<RouteRecordRaw> = [
 export const asyncRoutes = []
 
 export const router = createRouter({
-  history: createWebHistory(),
+  history: createWebHashHistory(),
   routes: constantRoutes
 })
 
