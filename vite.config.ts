@@ -8,7 +8,7 @@ export default ({ command }: ConfigEnv): UserConfigExport => {
   const root = process.cwd()
   return {
     root,
-    base: command === 'serve' ? '/' : '/vue3-element-admin/',
+    base: command === 'serve' ? '/' : '/vue3-element-admin-ts/',
     plugins: [
       vue(),
       viteMockServe({

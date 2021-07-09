@@ -1,6 +1,6 @@
 {
   "index.html": {
-    "file": "assets/index.8b8b4fed.js",
+    "file": "assets/index.76199d08.js",
     "src": "index.html",
     "isEntry": true,
     "imports": [
@@ -23,7 +23,7 @@
       "src/views/xueyue/index.vue"
     ],
     "css": [
-      "assets/index.caf26551.css"
+      "assets/index.1fb28e76.css"
     ],
     "assets": [
       "assets/element-icons.9c88a535.woff",
@@ -40,7 +40,7 @@
     ]
   },
   "src/views/login/index.vue": {
-    "file": "assets/index.ccaea795.js",
+    "file": "assets/index.0a7af16f.js",
     "src": "src/views/login/index.vue",
     "isDynamicEntry": true,
     "imports": [
@@ -48,11 +48,11 @@
       "_element-plus.d1228c47.js"
     ],
     "css": [
-      "assets/index.ab870ba5.css"
+      "assets/index.5afc803e.css"
     ]
   },
   "src/views/error-page/404.vue": {
-    "file": "assets/404.0dc04e2e.js",
+    "file": "assets/404.f6ca6a44.js",
     "src": "src/views/error-page/404.vue",
     "isDynamicEntry": true,
     "imports": [
@@ -63,7 +63,7 @@
     ]
   },
   "src/views/error-page/401.vue": {
-    "file": "assets/401.588e8b58.js",
+    "file": "assets/401.53d5f4ad.js",
     "src": "src/views/error-page/401.vue",
     "isDynamicEntry": true,
     "imports": [
@@ -74,7 +74,7 @@
     ]
   },
   "src/layout/index.vue": {
-    "file": "assets/index.b6b4c60f.js",
+    "file": "assets/index.834329a0.js",
     "src": "src/layout/index.vue",
     "isDynamicEntry": true,
     "imports": [
@@ -98,7 +98,7 @@
     ]
   },
   "src/views/setting/setting.vue": {
-    "file": "assets/setting.f8e89bed.js",
+    "file": "assets/setting.492e2671.js",
     "src": "src/views/setting/setting.vue",
     "isDynamicEntry": true,
     "imports": [
