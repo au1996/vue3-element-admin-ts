@@ -94,24 +94,22 @@ const resizeHandler = () => {
     position: fixed;
     top: 0;
   }
-}
 
-.drawer-bg {
-  position: absolute;
-  top: 0;
-  z-index: 999;
-  width: 100%;
-  height: 100%;
-  background: #000;
-  opacity: 0.3;
-}
+  .main-container {
+    position: relative;
+    min-height: 100%;
+    margin-left: $sideBarWidth;
+    transition: margin-left 0.28s;
+  }
 
-.hideSidebar .fixed-header {
-  width: calc(100% - 54px);
-}
-
-.main-container {
-  margin-left: 20px;
-  transition: margin-left 0.28s;
+  .drawer-bg {
+    position: absolute;
+    top: 0;
+    z-index: 999;
+    width: 100%;
+    height: 100%;
+    background: #000;
+    opacity: 0.3;
+  }
 }
 </style>

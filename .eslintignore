@@ -1,4 +1,4 @@
-
+**/*.d.ts
 *.sh
 node_modules
 *.md

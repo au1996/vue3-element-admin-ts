@@ -1,5 +1,5 @@
 <template>
-  <el-menu class="navbar" mode="horizontal">
+  <div class="navbar" mode="horizontal">
     <Hamburger class="hamburger-container" :is-active="opened" @toggleClick="toggleSideBar" />
     <Breadcrumb class="breadcrumb-container" />
     <div class="right-menu">
@@ -20,7 +20,7 @@
         </template>
       </el-dropdown>
     </div>
-  </el-menu>
+  </div>
 </template>
 
 <script lang="ts" setup>

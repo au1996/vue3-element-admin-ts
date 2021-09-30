@@ -27,7 +27,7 @@
           :nav="child"
           class="nest-menu"
         />
-        <el-menu-item v-else :key="child.path" :index="child.path">
+        <el-menu-item v-else :index="child.path">
           <template #title>
             <span>{{ child.meta.title }}</span>
           </template>
