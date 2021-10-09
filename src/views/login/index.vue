@@ -37,12 +37,11 @@
 <script lang="ts" setup>
 import { ref, reactive } from 'vue'
 import { useRouter } from 'vue-router'
-import { useStore } from 'vuex'
+import store from '@/store'
 import { ElMessage } from 'element-plus'
 import { validate } from '@/utils/formExtend'
 
 const router = useRouter()
-const store = useStore()
 
 const btnLoading = ref(false)
 const loginFormRef = ref(null)

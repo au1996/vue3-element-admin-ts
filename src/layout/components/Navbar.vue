@@ -26,14 +26,13 @@
 <script lang="ts" setup>
 import { computed } from 'vue'
 import { useRouter } from 'vue-router'
-import { useStore } from 'vuex'
 import { ElMessage, ElMessageBox } from 'element-plus'
+import store from '@/store'
 import Hamburger from '@/components/Hamburger/index.vue'
 import Breadcrumb from '@/components/Breadcrumb/index.vue'
 import Screenfull from '@/components/Screenfull/index.vue'
 
 const router = useRouter()
-const store = useStore()
 const opened = computed(() => store.state.app.sidebar.opened)
 const avatar = computed(() => store.state.user.avatar)
 

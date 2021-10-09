@@ -27,14 +27,13 @@
 
 <script lang="ts" setup>
 import { reactive, computed, onMounted } from 'vue'
-import { useStore } from 'vuex'
+import store from '@/store'
 import { constantRoutes } from '@/router'
 import { getRoles } from '@/utils/auth'
 import SidebarItem from './SidebarItem.vue'
 
 const roles = getRoles()
-const store = useStore()
-const routerList: Array<any> = reactive([])
+const routerList: any[] = reactive([])
 
 const opened = computed(() => store.state.app.sidebar.opened)
 const isCollapse = computed(() => !opened.value)
@@ -49,7 +48,8 @@ onMounted(() => {
 const filterRoutes = () => {
   constantRoutes.forEach((item) => {
     if (item.path === '/') {
-      routerList.push(...item.children)
+      const childrens = item.children as any[]
+      routerList.push(...childrens)
     }
   })
   for (let i = 0; i < routerList.length; i++) {

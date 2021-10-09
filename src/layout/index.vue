@@ -18,14 +18,13 @@
 <script lang="ts" setup>
 import { ref, computed, watch, onBeforeMount, onMounted, onBeforeUnmount } from 'vue'
 import { useRoute } from 'vue-router'
-import { useStore } from 'vuex'
+import store from '@/store'
 import Sidebar from './components/Sidebar/index.vue'
 import Navbar from './components/Navbar.vue'
 import TagsView from './components/TagsView/index.vue'
 import AppMain from './components/AppMain.vue'
 
 const route = useRoute()
-const store = useStore()
 const mobileWidth = ref(992)
 
 const opened = computed(() => store.state.app.sidebar.opened)
