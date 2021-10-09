@@ -2,7 +2,7 @@ import { ComponentCustomProperties } from 'vue'
 import { Store } from 'vuex'
 import { RouteRecordRaw } from 'vue-router'
 
-declare interface IStateApp {
+declare interface App {
   device: string
   size: string
   sidebar: {
@@ -11,17 +11,17 @@ declare interface IStateApp {
   }
 }
 
-declare interface IStatePermission {
+declare interface Permission {
   routes: RouteRecordRaw[]
   addRoutes: RouteRecordRaw[]
 }
 
-declare interface IStateTagsView {
+declare interface TagsView {
   visitedViews: any[]
   cachedViews: any[]
 }
 
-declare interface IStateUser {
+declare interface User {
   token: string | undefined
   roles: string | undefined
   name: string | undefined
@@ -29,15 +29,15 @@ declare interface IStateUser {
   introduction: string
 }
 
-declare interface IState {
-  app: IStateApp
-  permission: IStatePermission
-  tagsView: IStateTagsView
-  user: IStateUser
+declare interface State {
+  app: App
+  permission: Permission
+  tagsView: TagsView
+  user: User
 }
 
 declare module '@vue/runtime-core' {
   interface ComponentCustomProperties {
-    $store: Store<IState>
+    $store: Store<State>
   }
 }

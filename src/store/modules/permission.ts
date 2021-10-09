@@ -1,5 +1,36 @@
+import { Module } from 'vuex'
+import { Permission } from '#/store'
 import { asyncRoutes, constantRoutes } from '@/router'
-import { IStatePermission } from '#/store'
+
+const permissionModule: Module<Permission, any> = {
+  namespaced: true,
+  state: {
+    routes: [],
+    addRoutes: []
+  },
+  mutations: {
+    SET_ROUTES: (state, routes: any) => {
+      state.addRoutes = routes
+      state.routes = constantRoutes.concat(routes)
+    }
+  },
+  actions: {
+    generateRoutes({ commit }, roles: any) {
+      return new Promise((resolve) => {
+        let accessedRoutes
+        if (roles.includes('admin')) {
+          accessedRoutes = asyncRoutes || []
+        } else {
+          accessedRoutes = filterAsyncRoutes(asyncRoutes, roles)
+        }
+        commit('SET_ROUTES', accessedRoutes)
+        resolve(accessedRoutes)
+      })
+    }
+  }
+}
+
+export default permissionModule
 
 /**
  * Use meta.role to determine if the current user has permission
@@ -33,38 +64,4 @@ export function filterAsyncRoutes(routes: any, roles: any) {
   })
 
   return res
-}
-
-const state: IStatePermission = {
-  routes: [],
-  addRoutes: []
-}
-
-const mutations = {
-  SET_ROUTES: (state: IStatePermission, routes: any) => {
-    state.addRoutes = routes
-    state.routes = constantRoutes.concat(routes)
-  }
-}
-
-const actions = {
-  generateRoutes({ commit }: any, roles: any) {
-    return new Promise((resolve) => {
-      let accessedRoutes
-      if (roles.includes('admin')) {
-        accessedRoutes = asyncRoutes || []
-      } else {
-        accessedRoutes = filterAsyncRoutes(asyncRoutes, roles)
-      }
-      commit('SET_ROUTES', accessedRoutes)
-      resolve(accessedRoutes)
-    })
-  }
-}
-
-export default {
-  namespaced: true,
-  state,
-  mutations,
-  actions
 }

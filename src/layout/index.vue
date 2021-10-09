@@ -42,7 +42,7 @@ const classObj = computed(() => {
 
 watch(route, () => {
   if (device.value === 'mobile' && opened.value) {
-    store.dispatch('app/closeSideBar', { withoutAnimation: false })
+    store.dispatch('app/closeSideBar', false)
   }
 })
 
@@ -54,7 +54,7 @@ onMounted(() => {
   const isMob = isMobile()
   if (isMob) {
     store.dispatch('app/toggleDevice', 'mobile')
-    store.dispatch('app/closeSideBar', { withoutAnimation: true })
+    store.dispatch('app/closeSideBar', true)
   }
 })
 
@@ -63,7 +63,7 @@ onBeforeUnmount(() => {
 })
 
 const handleClickOutside = () => {
-  store.dispatch('app/closeSideBar', { withoutAnimation: false })
+  store.dispatch('app/closeSideBar', false)
 }
 
 const isMobile = (): boolean => {
@@ -77,7 +77,7 @@ const resizeHandler = () => {
     store.dispatch('app/toggleDevice', isMob ? 'mobile' : 'desktop')
 
     if (isMob) {
-      store.dispatch('app/closeSideBar', { withoutAnimation: true })
+      store.dispatch('app/closeSideBar', true)
     }
   }
 }

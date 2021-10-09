@@ -1,7 +1,10 @@
 <template>
-  <router-view v-slot="{ Component }">
-    <component :is="Component" />
-  </router-view>
+  <div>
+    <h1>菜单</h1>
+    <router-view v-slot="{ Component }">
+      <component :is="Component" />
+    </router-view>
+  </div>
 </template>
 
 <script></script>

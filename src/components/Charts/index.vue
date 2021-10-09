@@ -53,7 +53,7 @@ const props = defineProps({
   }
 })
 
-const echartMain = ref(null)
+const echartMain = ref()
 onMounted(() => {
   const myChart = echarts.init(echartMain.value)
   myChart.setOption(props.eData)

@@ -44,7 +44,7 @@ export function add_user(data: any) {
  * @param {*} id
  * @returns
  */
-export function get_user_info(id: string) {
+export function get_user_info(id: string | undefined) {
   return request({
     url: `/api/user/${id}`,
     method: 'get'
