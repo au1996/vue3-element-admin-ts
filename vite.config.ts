@@ -5,9 +5,9 @@ import vue from '@vitejs/plugin-vue'
 
 // https://vitejs.dev/config/
 export default ({ command }: ConfigEnv): UserConfigExport => {
-  const root = process.cwd()
+  const prodMock = true
   return {
-    root,
+    // base: '/',
     base: command === 'serve' ? '/' : '/vue3-element-admin-ts/',
     plugins: [
       vue(),
@@ -15,7 +15,7 @@ export default ({ command }: ConfigEnv): UserConfigExport => {
         supportTs: true,
         mockPath: 'mock',
         localEnabled: command === 'serve',
-        prodEnabled: command !== 'serve',
+        prodEnabled: command !== 'serve' && prodMock,
         injectCode: `
           import { setupProdMockServer } from './mockProdServer';
           setupProdMockServer();
@@ -36,7 +36,7 @@ export default ({ command }: ConfigEnv): UserConfigExport => {
       }
     },
     server: {
-      port: 3001,
+      port: 3002,
       open: false,
       proxy: {
         '/api': {
@@ -54,7 +54,8 @@ export default ({ command }: ConfigEnv): UserConfigExport => {
         output: {
           manualChunks: {
             vue: ['vue', 'vue-router', 'vuex'],
-            'element-plus': ['element-plus']
+            'element-plus': ['element-plus'],
+            echarts: ['echarts']
           }
         }
       },

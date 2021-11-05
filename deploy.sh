@@ -8,7 +8,7 @@ npm run build
 
 # 部署
 git add .
-git commit -m 'feat: :zap: update vue version'
+git commit -m 'feat: :zap: update vite.config.ts'
 git push origin master
 git subtree push --prefix dist origin gh-pages
 
