@@ -1,6 +1,6 @@
 {
   "index.html": {
-    "file": "assets/index.684a9208.js",
+    "file": "assets/index.4c106e53.js",
     "src": "index.html",
     "isEntry": true,
     "imports": [
@@ -43,7 +43,7 @@
     "file": "assets/echarts.b1b1c131.js"
   },
   "src/views/login/index.vue": {
-    "file": "assets/index.84031194.js",
+    "file": "assets/index.25c9daac.js",
     "src": "src/views/login/index.vue",
     "isDynamicEntry": true,
     "imports": [
@@ -78,7 +78,7 @@
     ]
   },
   "src/layout/index.vue": {
-    "file": "assets/index.68fb2a86.js",
+    "file": "assets/index.e2fa8fa1.js",
     "src": "src/layout/index.vue",
     "isDynamicEntry": true,
     "imports": [
@@ -102,7 +102,7 @@
     ]
   },
   "src/views/setting/setting.vue": {
-    "file": "assets/setting.99637324.js",
+    "file": "assets/setting.8afcb8ba.js",
     "src": "src/views/setting/setting.vue",
     "isDynamicEntry": true,
     "imports": [
@@ -164,14 +164,14 @@
     ]
   },
   "src/views/xueyue/index.vue": {
-    "file": "assets/index.5cc4bd02.js",
+    "file": "assets/index.b7e9582d.js",
     "src": "src/views/xueyue/index.vue",
     "isDynamicEntry": true,
     "imports": [
       "_vue.7ec5d134.js"
     ],
     "css": [
-      "assets/index.dbabba5c.css"
+      "assets/index.df3928ab.css"
     ]
   }
 }
