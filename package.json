@@ -10,8 +10,8 @@
     "lint:js-fix": "eslint \"{src,mock}/**/*.{vue,ts}\" --fix",
     "lint:css": "stylelint \"**/*.{vue,css,scss}\" --cache --cache-location node_modules/.cache/stylelint/",
     "lint:css-fix": "stylelint \"**/*.{vue,css,scss}\" --cache --cache-location node_modules/.cache/stylelint/ --fix",
-    "test": "jest",
-    "prepare": "husky install"
+    "husky": "husky install",
+    "test": "jest"
   },
   "lint-staged": {
     "*.{ts,vue}": [
