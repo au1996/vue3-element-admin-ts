@@ -20,7 +20,7 @@
 git clone https://github.com/au1996/vue3-element-admin-ts.git
 
 # 进入项目目录
-cd vue3-element-admin
+cd vue3-element-admin-ts
 
 # 安装依赖
 npm install
