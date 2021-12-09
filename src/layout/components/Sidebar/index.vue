@@ -3,7 +3,7 @@
     <div class="logo" @click="$router.push('/')">
       <transition name="fade-transform" mode="out-in">
         <div class="flex-center">
-          <img class="logo-img" src="/img/logo.png" alt="logo" />
+          <img class="logo-img" :src="require('@img/logo.png')" alt="logo" />
           <h1 v-show="opened" class="logo-text">Vue Element Admin</h1>
         </div>
       </transition>
@@ -84,14 +84,14 @@ const filterChildrens = (routers: any) => {
   position: absolute;
   top: 0;
   display: flex;
+  justify-content: center;
+  align-items: center;
   width: 100%;
   height: 50px;
   overflow: hidden;
   text-align: center;
   cursor: pointer;
   background-color: #2b2f3a;
-  justify-content: center;
-  align-items: center;
 
   .logo-img {
     width: 32px;

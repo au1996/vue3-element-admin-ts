@@ -1,16 +1,13 @@
-const componentFiles = import.meta.globEager('./*.ts')
-const pathList: any[] = []
-
-for (const path in componentFiles) {
-  pathList.push(path)
-}
+const directiveFiles: any = require.context('./', true, /\.ts$/)
 
 export default {
   install(Vue: any) {
-    pathList.forEach((path) => {
-      const moduleName = path.replace(/^\.\/(.*)\.\w+$/, '$1')
-      const value = componentFiles[path]
-      Vue.directive(moduleName, value.default)
+    directiveFiles.keys().forEach((path: string) => {
+      if (!path.includes('index.ts')) {
+        const moduleName = path.replace(/^\.\/(.*)\.\w+$/, '$1')
+        const value = directiveFiles(path)
+        Vue.directive(moduleName, value.default)
+      }
     })
   }
 }

@@ -8,7 +8,7 @@ type ISettings = {
 }
 
 const settings: ISettings = {
-  title: 'Vue3 Element Admin',
+  title: 'Vue3 Element Admin Ts',
   showSettings: true,
   tagsView: true,
   fixedHeader: false,
