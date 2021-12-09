@@ -8,7 +8,7 @@ npm run build
 
 # 部署
 git add .
-git commit -m 'feat: :zap: update README.md'
+git commit -m 'feat: :sparkles: add directive'
 git push origin master
 git subtree push --prefix dist origin gh-pages
 

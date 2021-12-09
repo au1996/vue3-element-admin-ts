@@ -35,7 +35,7 @@ export const constantRoutes: Array<RouteRecordRaw> = [
       },
       {
         path: '/setting',
-        component: () => import('@/views/setting/setting.vue'),
+        component: () => import('@/views/setting/index.vue'),
         name: 'Setting',
         meta: { title: '设置', icon: 'el-icon-setting', roles: ['admin'] }
       },

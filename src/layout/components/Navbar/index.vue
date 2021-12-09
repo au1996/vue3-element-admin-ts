@@ -28,9 +28,9 @@ import { computed } from 'vue'
 import { useRouter } from 'vue-router'
 import { ElMessage, ElMessageBox } from 'element-plus'
 import store from '@/store'
-import Hamburger from '@/components/Hamburger/index.vue'
-import Breadcrumb from '@/components/Breadcrumb/index.vue'
-import Screenfull from '@/components/Screenfull/index.vue'
+import Hamburger from './Hamburger.vue'
+import Breadcrumb from './Breadcrumb.vue'
+import Screenfull from './Screenfull.vue'
 
 const router = useRouter()
 const opened = computed(() => store.state.app.sidebar.opened)
@@ -82,9 +82,9 @@ const loginOut = () => {
 
   :deep(.right-menu) {
     display: flex;
+    align-items: center;
     float: right;
     height: 100%;
-    align-items: center;
 
     &:focus {
       outline: none;
