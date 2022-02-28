@@ -8,7 +8,7 @@ npm run build
 
 # 部署
 git add .
-git commit -m 'feat: :bookmark: init webpack version'
+git commit -m 'feat: :art: Modify copy instruction prompt'
 git push origin master
 git subtree push --prefix dist origin gh-pages
 

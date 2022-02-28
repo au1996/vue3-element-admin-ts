@@ -1,10 +1,15 @@
+import { ElMessage } from 'element-plus'
+
 export default {
   mounted(el: any, { value }: any) {
     el.$value = value
     el.handler = () => {
       if (!el.$value) {
         // 值为空的时候，给出提示
-        console.log('无复制内容')
+        ElMessage({
+          type: 'error',
+          message: '无复制内容'
+        })
         return
       }
       // 动态创建 textarea 标签
@@ -21,7 +26,10 @@ export default {
       textarea.select()
       const result = document.execCommand('Copy')
       if (result) {
-        alert('复制成功：' + el.$value)
+        ElMessage({
+          type: 'success',
+          message: '复制成功：' + el.$value
+        })
       }
       document.body.removeChild(textarea)
     }
