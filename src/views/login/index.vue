@@ -4,23 +4,23 @@
       <div class="login-title">系统登录</div>
       <el-form ref="loginFormRef" class="login-form" :model="param" :rules="rules" status-icon>
         <el-form-item prop="username">
-          <el-input v-model="param.username" clearable placeholder="用户名">
+          <el-input v-model="param.username" clearable placeholder="用户名" size="large">
             <template #prepend>
-              <i class="el-icon-s-custom" />
+              <I name="UserFilled" size="14" />
             </template>
           </el-input>
         </el-form-item>
         <el-form-item prop="password">
           <el-input
             v-model="param.password"
-            clearable
             placeholder="密码"
+            size="large"
             :type="passwordType"
             @keyup.enter="submitForm"
           >
             <template #prepend>
-              <i v-show="passwordLock" class="el-icon-lock" @click="switchPass" />
-              <i v-show="!passwordLock" class="el-icon-unlock" @click="switchPass" />
+              <I v-if="passwordLock" name="Lock" size="14" @click="switchPass" />
+              <I v-else name="Unlock" size="14" @click="switchPass" />
             </template>
           </el-input>
         </el-form-item>

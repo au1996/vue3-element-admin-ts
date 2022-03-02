@@ -20,7 +20,7 @@ export default defineComponent({
   },
   computed: {
     scrollWrapper(): any {
-      return (this.$refs.scrollContainer as any).$refs.wrap
+      return (this.$refs.scrollContainer as any).$refs.wrap$
     }
   },
   mounted() {

@@ -1,9 +1,9 @@
-import { createApp } from 'vue'
+import { createApp, createVNode } from 'vue'
 
 // element-plus
-import ElementPlus from 'element-plus'
-import 'element-plus/packages/theme-chalk/src/base.scss'
-import 'element-plus/lib/theme-chalk/index.css'
+import ElementPlus, { ElIcon } from 'element-plus'
+import 'element-plus/dist/index.css'
+import * as Icons from '@element-plus/icons-vue'
 
 // global css
 import './styles/index.scss'
@@ -33,10 +33,21 @@ if (process.env.NODE_ENV === 'production') {
 }
 
 const app = createApp(App)
-app.use(ElementPlus)
-app.use(Directives)
-app.use(router).use(store).mount('#app')
 
-app.provide('$DateFormat', DateFormat)
+app.use(ElementPlus).use(Directives).use(router).use(store).provide('$DateFormat', DateFormat).mount('#app')
+
+const Icon = (props: { name: string; size: number | string; color: string }) => {
+  const { name, size, color } = props
+  return createVNode(
+    ElIcon,
+    {
+      size: size || 16,
+      color
+    },
+    () => createVNode(Icons[name as keyof typeof Icons])
+  )
+}
+
+app.component('I', Icon)
 
 export default app

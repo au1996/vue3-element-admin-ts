@@ -1,11 +1,9 @@
 <template>
   <div class="sidebar-container">
     <div class="logo" @click="$router.push('/')">
+      <img class="logo-img" :src="require('@img/logo.png')" alt="logo" />
       <transition name="fade-transform" mode="out-in">
-        <div class="flex-center">
-          <img class="logo-img" :src="require('@img/logo.png')" alt="logo" />
-          <h1 v-show="opened" class="logo-text">Vue Element Admin</h1>
-        </div>
+        <h1 v-show="opened" class="logo-text">Vue Element Admin</h1>
       </transition>
     </div>
     <el-scrollbar wrap-class="scrollbar-wrapper">

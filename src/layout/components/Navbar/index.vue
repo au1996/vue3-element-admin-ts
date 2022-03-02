@@ -9,7 +9,7 @@
       <el-dropdown class="avatar-container right-menu-item">
         <div class="avatar-wrapper">
           <img :src="avatar ? avatar : '/img/logo.png'" class="user-avatar" />
-          <i class="el-icon-caret-bottom" />
+          <I name="CaretBottom" />
         </div>
         <template #dropdown>
           <el-dropdown-menu>
@@ -26,7 +26,7 @@
 <script lang="ts" setup>
 import { computed } from 'vue'
 import { useRouter } from 'vue-router'
-import { ElMessage, ElMessageBox } from 'element-plus'
+import { ElMessage } from 'element-plus'
 import store from '@/store'
 import Hamburger from './Hamburger.vue'
 import Breadcrumb from './Breadcrumb.vue'
