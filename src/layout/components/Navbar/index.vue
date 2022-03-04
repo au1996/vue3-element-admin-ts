@@ -14,8 +14,8 @@
         <template #dropdown>
           <el-dropdown-menu>
             <el-dropdown-item @click="$router.push('/')">首页</el-dropdown-item>
-            <el-dropdown-item divided @click="editPossword">修改密码</el-dropdown-item>
-            <el-dropdown-item divided @click="loginOut">登出</el-dropdown-item>
+            <el-dropdown-item @click="editPossword">修改密码</el-dropdown-item>
+            <el-dropdown-item @click="loginOut">登出</el-dropdown-item>
           </el-dropdown-menu>
         </template>
       </el-dropdown>

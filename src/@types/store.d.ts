@@ -2,6 +2,19 @@ import { ComponentCustomProperties } from 'vue'
 import { Store } from 'vuex'
 import { RouteRecordRaw } from 'vue-router'
 
+declare module '@vue/runtime-core' {
+  interface ComponentCustomProperties {
+    $store: Store<State>
+  }
+}
+
+declare interface State {
+  app: App
+  permission: Permission
+  tagsView: TagsView
+  user: User
+}
+
 declare interface App {
   device: string
   size: string
@@ -27,17 +40,4 @@ declare interface User {
   name: string | undefined
   avatar: string | undefined
   introduction: string
-}
-
-declare interface State {
-  app: App
-  permission: Permission
-  tagsView: TagsView
-  user: User
-}
-
-declare module '@vue/runtime-core' {
-  interface ComponentCustomProperties {
-    $store: Store<State>
-  }
 }
