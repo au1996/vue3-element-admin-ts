@@ -1,7 +1,7 @@
 <template>
   <div class="user-manage-view">
     <div class="header-box">
-      <el-button type="primary" icon="el-icon-plus" @click="showDialog">添加用户</el-button>
+      <el-button type="primary" icon="el-icon-plus" @click="showDialog(1)">添加用户</el-button>
     </div>
     <el-table v-loading="tabelLoading" border :data="tableList">
       <el-table-column prop="username" label="账号" />
@@ -127,7 +127,7 @@ const getRoleName = (id: string) => {
 /**
  * 展开弹窗
  */
-const showDialog = (flag: number, row: any) => {
+const showDialog = (flag: number, row?: any) => {
   dialogVisible.value = true
   dialogFlag.value = flag
   if (flag === 2) {
