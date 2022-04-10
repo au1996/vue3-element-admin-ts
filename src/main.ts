@@ -34,7 +34,13 @@ if (process.env.NODE_ENV === 'production') {
 
 const app = createApp(App)
 
-app.use(ElementPlus).use(Directives).use(router).use(store).provide('$DateFormat', DateFormat).mount('#app')
+app
+  .use(ElementPlus)
+  .use(Directives)
+  .use(router)
+  .use(store)
+  .provide('$DateFormat', DateFormat)
+  .mount('#app')
 
 const Icon = (props: { name: string; size: number | string; color: string }) => {
   const { name, size, color } = props

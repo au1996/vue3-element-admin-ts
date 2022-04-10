@@ -11,7 +11,12 @@
         @contextmenu.prevent="openMenu(tag, $event)"
       >
         {{ tag.title }}
-        <I v-if="!isAffix(tag)" name="Close" :size="10" @click.prevent.stop="closeSelectedTag(tag)" />
+        <I
+          v-if="!isAffix(tag)"
+          name="Close"
+          :size="10"
+          @click.prevent.stop="closeSelectedTag(tag)"
+        />
       </router-link>
     </ScrollPane>
     <ul v-show="visible" :style="{ left: left + 'px', top: top + 'px' }" class="contextmenu">

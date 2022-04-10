@@ -5,10 +5,15 @@ import { Ref, unref } from 'vue'
  * @param ref 节点
  * @param isGetError 是否获取错误项
  */
-export async function validate(ref: Ref | any, isGetError = false): Promise<boolean | { valid: boolean; object: any }> {
+export async function validate(
+  ref: Ref | any,
+  isGetError = false
+): Promise<boolean | { valid: boolean; object: any }> {
   const validateFn = unref(ref).validate
   return new Promise((resolve) =>
-    validateFn((valid: boolean, object: any) => (isGetError ? resolve({ valid, object }) : resolve(valid)))
+    validateFn((valid: boolean, object: any) =>
+      isGetError ? resolve({ valid, object }) : resolve(valid)
+    )
   )
 }
 
@@ -17,9 +22,14 @@ export async function validate(ref: Ref | any, isGetError = false): Promise<bool
  * @param ref 节点
  * @param props 字段属性
  */
-export async function validateField(ref: Ref | any, props: Array<string> | string): Promise<string> {
+export async function validateField(
+  ref: Ref | any,
+  props: Array<string> | string
+): Promise<string> {
   const validateFieldFn = unref(ref).validateField
-  return new Promise((resolve) => validateFieldFn(props, (errorMessage: string) => resolve(errorMessage)))
+  return new Promise((resolve) =>
+    validateFieldFn(props, (errorMessage: string) => resolve(errorMessage))
+  )
 }
 
 /**

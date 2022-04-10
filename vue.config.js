@@ -39,13 +39,17 @@ module.exports = {
     // 别名
     config.resolve.alias.set('@', resolve('src')).set('@img', resolve('src/assets/img'))
     // source-map
-    config.when(process.env.NODE_ENV === 'development', (config) => config.devtool('cheap-source-map'))
+    config.when(process.env.NODE_ENV === 'development', (config) =>
+      config.devtool('cheap-source-map')
+    )
     // 自定义环境变量
     config.plugin('define').tap((args) => {
       const arg = args[0]
       Object.assign(
         arg['process.env'],
-        process.env.NODE_ENV === 'development' ? require('./src/config/env.dev') : require('./src/config/env.prod')
+        process.env.NODE_ENV === 'development'
+          ? require('./src/config/env.dev')
+          : require('./src/config/env.prod')
       )
       return args
     })
@@ -109,6 +113,15 @@ module.exports = {
   configureWebpack: (config) => {
     if (process.env.NODE_ENV === 'production') {
       return {
+        module: {
+          rules: [
+            {
+              test: /\.mjs$/,
+              include: /node_modules/,
+              type: 'javascript/auto'
+            }
+          ]
+        },
         plugins: [
           new CompressionPlugin({
             test: /\.js$|\.html$|\.css/, // 匹配文件名

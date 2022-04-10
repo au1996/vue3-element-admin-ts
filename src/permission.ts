@@ -28,7 +28,10 @@ router.beforeEach(async (to: any, from: any, next) => {
       if (routes.length) {
         // Permission filtering
         const toRoute: any = routes[0]
-        if ((toRoute.meta && !toRoute.meta.roles) || (toRoute.meta && toRoute.meta.roles.includes(roles))) {
+        if (
+          (toRoute.meta && !toRoute.meta.roles) ||
+          (toRoute.meta && toRoute.meta.roles.includes(roles))
+        ) {
           next()
         } else {
           next('/401')

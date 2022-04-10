@@ -2,7 +2,16 @@ import { Module } from 'vuex'
 import { ElMessage } from 'element-plus'
 import { User } from '#/store'
 import { user_login, user_logout, get_user_info } from '@/api/user'
-import { getToken, setToken, getRoles, setRoles, getName, setName, getAvatar, setAvatar } from '@/utils/auth'
+import {
+  getToken,
+  setToken,
+  getRoles,
+  setRoles,
+  getName,
+  setName,
+  getAvatar,
+  setAvatar
+} from '@/utils/auth'
 
 const userModule: Module<User, any> = {
   namespaced: true,
