@@ -8,7 +8,7 @@ npm run build
 
 # 部署
 git add .
-git commit -m 'feat: :art: Modify copy instruction prompt'
+git commit -m 'feat: :art: update postcss.config.js'
 git push origin master
 git subtree push --prefix dist origin gh-pages
 
