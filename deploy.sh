@@ -9,7 +9,7 @@ npm run build
 # 部署
 git add .
 git commit -m 'feat: :art: update postcss.config.js'
-git push origin master
+git push origin webpack
 git subtree push --prefix dist origin gh-pages
 
 # 如果你要部署在 https://<USERNAME>.github.io
