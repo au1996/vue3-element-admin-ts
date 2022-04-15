@@ -31,7 +31,7 @@
     "mockjs": "1.0.1-beta3",
     "nprogress": "0.2.0",
     "screenfull": "5.1.0",
-    "vue": "3.2.2",
+    "vue": "3.2.31",
     "vue-router": "4.0.4",
     "vuex": "4.0.0"
   },

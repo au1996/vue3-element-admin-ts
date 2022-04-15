@@ -5,16 +5,21 @@
  * "error" 或者 2 -- 将规则打开为错误（触发时退出代码为 1）
  */
 module.exports = {
-  root: true, //禁用持续查找（root）
+  root: true, // 禁用持续查找（root）
   env: {
     browser: true, // 启用浏览器全局变量。
-    node: true, //Node.js全局变量和Node.js范围。
+    node: true, // Node.js全局变量和Node.js范围。
     es6: true // 启用ES6的功能。
+  },
+  globals: {
+    defineProps: 'readonly',
+    defineEmits: 'readonly',
+    defineExpose: 'readonly'
   },
   parserOptions: {
     parser: '@typescript-eslint/parser', // 解析器（parser）
-    ecmaVersion: 2020, // ECMA版本
-    sourceType: 'module' //指定源代码存在的位置，script | module，默认为script
+    ecmaVersion: 2021, // ECMA版本
+    sourceType: 'module' // 指定源代码存在的位置，script | module，默认为script
   },
   // eslint:recommended:表示引入eslint的核心功能，并且报告一些常见的共同错误。
   // extends: ['eslint:recommended', 'plugin:vue/vue3-recommended', 'plugin:@typescript-eslint/recommended'],
