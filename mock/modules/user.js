@@ -76,7 +76,7 @@ const userMockList = [
   {
     url: '/api/users',
     type: 'get',
-    timeout: 500,
+    timeout: 1500,
     response: () => {
       const list = userList
       return {

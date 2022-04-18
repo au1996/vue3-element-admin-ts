@@ -1,9 +1,11 @@
 <template>
   <div class="user-manage-view">
     <div class="header-box">
-      <el-button type="primary" icon="el-icon-plus" @click="showDialog">添加用户</el-button>
+      <el-button type="primary" @click="showDialog">
+        <I name="Plus" class="mr-4"></I>添加用户
+      </el-button>
     </div>
-    <el-table v-loading="tabelLoading" border :data="tableList">
+    <el-table v-loading="tabelLoading" :data="tableList" border>
       <el-table-column prop="username" label="账号" />
       <el-table-column prop="password" label="密码" />
       <el-table-column prop="role" label="角色">
@@ -25,18 +27,12 @@
       </el-table-column>
       <el-table-column label="操作" width="200">
         <template #default="{ row }">
-          <el-button
-            type="primary"
-            size="small"
-            icon="el-icon-edit"
-            @click="showDialog(2, row)"
-          >修改</el-button>
-          <el-button
-            type="danger"
-            size="small"
-            icon="el-icon-delete"
-            @click="deleteUser(row)"
-          >删除</el-button>
+          <el-button type="primary" size="small" @click="showDialog(2, row)">
+            <I name="Edit" size="small" class="mr-4"></I>修改
+          </el-button>
+          <el-button type="danger" size="small" @click="deleteUser(row)">
+            <I name="Delete" size="small" class="mr-4"></I>删除
+          </el-button>
         </template>
       </el-table-column>
     </el-table>
@@ -92,12 +88,19 @@ const formLoading = ref(false)
 const userFormRef = ref(null)
 const roleList: Array<any> = reactive([])
 const tableList: Array<any> = reactive([])
-const userForm: any = reactive({
+const userForm = ref({
   username: '',
   password: '',
   role: '',
   email: '',
   introduction: ''
+} as {
+  [key: string]: string
+  username: string
+  password: string
+  role: string
+  email: string
+  introduction: string
 })
 
 onBeforeMount(() => {
@@ -150,12 +153,14 @@ const showDialog = (flag: number, row: any) => {
   dialogVisible.value = true
   dialogFlag.value = flag
   if (flag === 2) {
-    for (const key in row) {
-      userForm[key] = row[key]
-    }
+    userForm.value = { ...row }
   } else {
-    for (const key in userForm) {
-      userForm[key] = ''
+    userForm.value = {
+      username: '',
+      password: '',
+      role: '',
+      email: '',
+      introduction: ''
     }
   }
 }

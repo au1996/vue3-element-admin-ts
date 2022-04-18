@@ -10,14 +10,13 @@
     </el-tabs>
     <User v-if="activeName === 'user'" />
     <ShowDirective v-else />
-    <!-- <div v-else>666</div> -->
   </div>
 </template>
 
 <script lang="ts" setup>
 import { ref } from 'vue'
 import User from './components/User.vue'
-import ShowDirective from '@/components/ShowDirective/index.vue'
+import ShowDirective from './components/ShowDirective/index.vue'
 
 const activeName = ref('user')
 const list = [

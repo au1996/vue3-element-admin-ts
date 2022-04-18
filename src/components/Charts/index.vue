@@ -3,7 +3,7 @@
 </template>
 
 <script lang="ts" setup>
-import { defineProps, ref, onMounted } from 'vue'
+import { defineProps, ref, onMounted, onUnmounted } from 'vue'
 import * as echarts from 'echarts/core'
 import { BarChart, LineChart } from 'echarts/charts'
 import {
@@ -59,9 +59,20 @@ const props = defineProps({
   }
 })
 
+let myChart: any = null
 const echartMain = ref()
 onMounted(() => {
-  const myChart = echarts.init(echartMain.value)
-  myChart.setOption(props.eData)
+  myChart = echarts.init(echartMain.value)
+  myChart?.setOption(props.eData)
+  window.addEventListener('resize', chartResize)
 })
+
+onUnmounted(() => {
+  myChart?.dispose()
+  window.removeEventListener('resize', chartResize)
+})
+
+function chartResize() {
+  myChart?.resize()
+}
 </script>

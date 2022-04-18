@@ -1,6 +1,6 @@
 import axios from 'axios'
 import { ElMessage } from 'element-plus'
-import { getToken, removeToken, removeRoles, removeName, removeAvatar } from './auth'
+import { getToken, removeToken, removeRoles, removeName, removeAvatar } from '@/utils/auth'
 
 const service = axios.create({
   // baseURL: process.env.VUE_APP_BASE_API,

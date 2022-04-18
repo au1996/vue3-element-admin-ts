@@ -2,9 +2,15 @@
   <div class="login-wrap">
     <div class="login-content">
       <div class="login-title">系统登录</div>
-      <el-form ref="loginFormRef" class="login-form" :model="param" :rules="rules" status-icon>
+      <el-form
+        ref="loginFormRef"
+        class="login-form"
+        :model="loginForm"
+        :rules="loginFormRules"
+        status-icon
+      >
         <el-form-item prop="username">
-          <el-input v-model="param.username" clearable placeholder="用户名" size="large">
+          <el-input v-model="loginForm.username" clearable placeholder="用户名" size="large">
             <template #prepend>
               <I name="UserFilled" size="14" />
             </template>
@@ -12,7 +18,7 @@
         </el-form-item>
         <el-form-item prop="password">
           <el-input
-            v-model="param.password"
+            v-model="loginForm.password"
             placeholder="密码"
             size="large"
             :type="passwordType"
@@ -36,24 +42,23 @@
 
 <script lang="ts" setup>
 import { ref, reactive } from 'vue'
+import { ElMessage, FormInstance } from 'element-plus'
 import { useRouter } from 'vue-router'
 import store from '@/store'
-import { ElMessage } from 'element-plus'
-import { validate } from '@/utils/formExtend'
 
 const router = useRouter()
 
 const btnLoading = ref(false)
-const loginFormRef = ref(null)
 const passwordLock = ref(true)
 const passwordType = ref('password')
 
-const param = reactive({
+const loginFormRef = ref<FormInstance>()
+const loginForm = reactive({
   username: '',
   password: ''
 })
 
-const rules = reactive({
+const loginFormRules = reactive({
   username: [{ required: true, message: '请输入用户名', trigger: 'blur' }],
   password: [{ required: true, message: '请输入密码', trigger: 'blur' }]
 })
@@ -68,21 +73,22 @@ const switchPass = () => {
 }
 
 const submitForm = async () => {
-  const valid = await validate(loginFormRef)
-  if (valid) {
-    btnLoading.value = true
-    // 访问登录接口
-    store
-      .dispatch('user/login', param)
-      .then(() => {
-        router.push('/')
-      })
-      .finally(() => {
-        btnLoading.value = false
-      })
-  } else {
-    ElMessage.error('请输入用户名和密码')
-  }
+  loginFormRef.value?.validate((valid) => {
+    if (valid) {
+      btnLoading.value = true
+      // 访问登录接口
+      store
+        .dispatch('user/login', loginForm)
+        .then(() => {
+          router.push('/')
+        })
+        .finally(() => {
+          btnLoading.value = false
+        })
+    } else {
+      ElMessage.error('请输入用户名和密码')
+    }
+  })
 }
 </script>
 
