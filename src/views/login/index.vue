@@ -2,13 +2,7 @@
   <div class="login-wrap">
     <div class="login-content">
       <div class="login-title">系统登录</div>
-      <el-form
-        ref="loginFormRef"
-        class="login-form"
-        :model="loginForm"
-        :rules="loginFormRules"
-        status-icon
-      >
+      <el-form ref="loginFormRef" class="login-form" :model="loginForm" :rules="loginFormRules">
         <el-form-item prop="username">
           <el-input v-model="loginForm.username" clearable placeholder="用户名" size="large">
             <template #prepend>

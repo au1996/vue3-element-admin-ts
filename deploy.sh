@@ -8,7 +8,7 @@ npm run build
 
 # 部署
 git add .
-git commit -m 'feat: :fire: delete formExtend.ts'
+git commit -m 'feat: :art: update auth.ts'
 git push origin webpack
 git subtree push --prefix dist origin gh-pages
 

@@ -1,6 +1,6 @@
 import axios from 'axios'
 import { ElMessage } from 'element-plus'
-import { getToken, removeToken, removeRoles, removeName, removeAvatar } from '@/utils/auth'
+import { getToken, clearUserInfo } from '@/utils/auth'
 
 const service = axios.create({
   // baseURL: process.env.VUE_APP_BASE_API,
@@ -9,7 +9,7 @@ const service = axios.create({
 
 // 发起请求之前的拦截器
 service.interceptors.request.use(
-  (config: any) => {
+  (config) => {
     // 如果有token 就携带tokon
     const token = getToken()
     if (token) {
@@ -17,18 +17,15 @@ service.interceptors.request.use(
     }
     return config
   },
-  (error: any) => Promise.reject(error)
+  (error) => Promise.reject(error)
 )
 
 // 响应拦截器
 service.interceptors.response.use(
-  (response: any) => response.data,
-  (error: any) => {
+  (response) => response.data,
+  (error) => {
     if (error.response && error.response.status === 401) {
-      removeToken()
-      removeRoles()
-      removeName()
-      removeAvatar()
+      clearUserInfo()
       location.reload()
     }
     ElMessage({
