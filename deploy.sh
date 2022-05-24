@@ -10,7 +10,7 @@ npm run build
 git add .
 git commit -m 'feat: :art: update auth.ts'
 git push origin webpack
-git subtree push --prefix dist origin gh-pages
+# git subtree push --prefix dist origin gh-pages
 
 # 如果你要部署在 https://<USERNAME>.github.io
 # git push -f git@github.com:<USERNAME>/<USERNAME>.github.io.git master
