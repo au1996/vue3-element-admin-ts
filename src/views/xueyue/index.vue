@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h1 class="title">测试 scss 全局变量</h1>
+    <h1 class="title">测试 scss 全局变量test</h1>
     <br />
     <el-button @click="onMessage">点击提示msg</el-button>
     <br />

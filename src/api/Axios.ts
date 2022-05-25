@@ -4,7 +4,7 @@ import { getToken, clearUserInfo } from '@/utils/auth'
 
 const service = axios.create({
   // baseURL: process.env.VUE_APP_BASE_API,
-  timeout: 10000 // request timeout
+  timeout: 1000 * 10 // request timeout
 })
 
 // 发起请求之前的拦截器
@@ -12,9 +12,11 @@ service.interceptors.request.use(
   (config) => {
     // 如果有token 就携带tokon
     const token = getToken()
+
     if (token) {
       config.headers['Authorization'] = 'Bearer__' + token
     }
+
     return config
   },
   (error) => Promise.reject(error)
@@ -28,10 +30,12 @@ service.interceptors.response.use(
       clearUserInfo()
       location.reload()
     }
+
     ElMessage({
       type: 'error',
       message: error.message
     })
+
     return Promise.reject(error)
   }
 )
