@@ -14,7 +14,8 @@ service.interceptors.request.use(
     const token = getToken()
 
     if (token) {
-      config.headers['Authorization'] = 'Bearer__' + token
+      config.headers = {}
+      config.headers.Authorization = 'Bearer__' + token
     }
 
     return config
