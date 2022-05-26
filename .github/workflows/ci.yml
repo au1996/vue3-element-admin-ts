@@ -26,6 +26,4 @@ jobs:
         with:
           publish_dir: ./dist
           github_token: ${{ secrets.XY_DEV }}
-          user_name: ${{ secrets.MY_USER_NAME }}
-          user_email: ${{ secrets.MY_USER_EMAIL }}
           commit_message: deploy
