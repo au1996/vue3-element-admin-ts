@@ -1,4 +1,10 @@
-import { validUsername, validURL, validLowerCase, validUpperCase, validAlphabets } from '@/utils/validate'
+import {
+  validUsername,
+  validURL,
+  validLowerCase,
+  validUpperCase,
+  validAlphabets
+} from '@/utils/validate'
 
 describe('Utils:validate', () => {
   it('validUsername', () => {
@@ -7,9 +13,9 @@ describe('Utils:validate', () => {
     expect(validUsername('xxxx')).toBe(false)
   })
   it('validURL', () => {
-    expect(validURL('https://github.com/PanJiaChen/vue-element-admin')).toBe(true)
-    expect(validURL('http://github.com/PanJiaChen/vue-element-admin')).toBe(true)
-    expect(validURL('github.com/PanJiaChen/vue-element-admin')).toBe(false)
+    expect(validURL('https://github.com/au1996/vue3-element-admin-ts')).toBe(true)
+    expect(validURL('http://github.com/au1996/vue3-element-admin-ts')).toBe(true)
+    expect(validURL('github.com/au1996/vue3-element-admin-ts')).toBe(false)
   })
   it('validLowerCase', () => {
     expect(validLowerCase('abc')).toBe(true)
