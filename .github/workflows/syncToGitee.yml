@@ -1,9 +1,7 @@
 name: syncToGitee
 on:
   push:
-    branches:
-      - master
-      - webpack
+    branches: [master, webpack]
 jobs:
   repo-sync:
     runs-on: ubuntu-latest
