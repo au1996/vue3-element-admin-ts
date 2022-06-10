@@ -1,9 +1,11 @@
 name: syncToGitee
+
 on:
   push:
     branches: [master, webpack]
+
 jobs:
-  repo-sync:
+  deploy:
     runs-on: ubuntu-latest
     steps:
       - name: Mirror the Github organization repos to Gitee.
