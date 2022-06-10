@@ -13,7 +13,7 @@ jobs:
         with:
           src: 'github/au1996'
           dst: 'gitee/au1996'
-          dst_key: ${{ secrets.NODE_DEV }}
+          dst_key: ${{ secrets.YAZX_PRIVATE_KEY }}
           dst_token: ${{ secrets.GITEE_TOKEN }}
           force_update: true
           debug: true
