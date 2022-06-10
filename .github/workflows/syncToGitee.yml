@@ -13,7 +13,7 @@ jobs:
         with:
           src: 'github/au1996'
           dst: 'gitee/au1996'
-          dst_key: ${{ secrets.YAZX_PRIVATE_KEY }}
+          dst_key: ${{ secrets.CLOUD_PRIVATE_KEY }}
           dst_token: ${{ secrets.GITEE_TOKEN }}
           static_list: 'vue3-element-admin-ts'
           force_update: true
