@@ -15,6 +15,6 @@ jobs:
           dst: 'gitee/au1996'
           dst_key: ${{ secrets.YAZX_PRIVATE_KEY }}
           dst_token: ${{ secrets.GITEE_TOKEN }}
-          static_list: 'vue3-element-admin'
+          static_list: 'vue3-element-admin-ts'
           force_update: true
           debug: true
