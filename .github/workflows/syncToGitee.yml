@@ -15,6 +15,5 @@ jobs:
           dst: 'gitee/au1996'
           dst_key: ${{ secrets.NODE_DEV }}
           dst_token:  ${{ secrets.GITEE_TOKEN }}
-          static_list: ""
           force_update: true
 			    debug: true

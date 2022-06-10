@@ -5,7 +5,7 @@ set -e
 
 # 部署
 git add .
-git commit -m 'feat: add syncToGitee'
+git commit -m 'feat: test'
 git push origin webpack
 
 cd -
