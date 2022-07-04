@@ -88,6 +88,10 @@ export const constantRoutes: Array<RouteRecordRaw> = [
         meta: { title: '雪月', icon: 'Flag', roles: ['admin'] }
       }
     ]
+  },
+  {
+    path: '/:pathMatch(.*)*',
+    redirect: '/'
   }
 ]
 
