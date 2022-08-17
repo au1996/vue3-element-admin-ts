@@ -9,7 +9,6 @@ export default {
   }
 }
 
-// 水印文字，父元素，字体，文字颜色
 /**
  *
  * @param {*} ele 元素
@@ -21,12 +20,12 @@ function addWaterMarker(ele: HTMLElement, text?: string, fontSize?: string, colo
   const can = document.createElement('canvas')
   ele.appendChild(can)
   can.width = 200
-  can.height = 150
+  can.height = 100
   can.style.display = 'none'
   var cans: any = can.getContext('2d')
   cans.rotate((-20 * Math.PI) / 180)
   cans.fontSize = fontSize || '16px Microsoft JhengHei'
-  cans.fillStyle = color || 'rgba(180, 180, 180, 0.5)'
+  cans.fillStyle = color || 'rgba(180, 180, 180, 0.6)'
   cans.textAlign = 'left'
   cans.textBaseline = 'Middle'
   text = text || '雪月水印'
