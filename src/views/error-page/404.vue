@@ -25,7 +25,7 @@
 </template>
 
 <script lang="ts" setup>
-const message: string = 'The webmaster said that you can not enter this page...'
+const message = 'The webmaster said that you can not enter this page...'
 </script>
 
 <style lang="scss" scoped>
