@@ -1,39 +1,65 @@
+import { DirectiveBinding } from 'vue'
+import Clipboard from 'clipboard'
+
 export default {
-  mounted(el: any, { value }: any) {
-    el.$value = value
-    el.handler = () => {
-      if (!el.$value) {
-        // 值为空的时候，给出提示
-        console.log('无复制内容')
-        return
-      }
-      // 动态创建 textarea 标签
-      const textarea = document.createElement('textarea')
-      // 将该 textarea 设为 readonly 防止 iOS 下自动唤起键盘，同时将 textarea 移出可视区域
-      ;(textarea.readOnly as boolean | string) = 'readonly'
-      textarea.style.position = 'absolute'
-      textarea.style.left = '-9999px'
-      // 将要 copy 的值赋给 textarea 标签的 value 属性
-      textarea.value = el.$value
-      // 将 textarea 插入到 body 中
-      document.body.appendChild(textarea)
-      // 选中值并复制
-      textarea.select()
-      const result = document.execCommand('Copy')
-      if (result) {
-        alert('复制成功：' + el.$value)
-      }
-      document.body.removeChild(textarea)
+  beforeMount(el: any, { value, arg }: DirectiveBinding) {
+    switch (arg) {
+      case 'success':
+        el.successCallback = value
+        break
+      case 'error':
+        el.errorCallback = value
+        break
+      default:
+        el.clipboardInstance = new Clipboard(el, {
+          text() {
+            return value
+          },
+          action() {
+            return arg === 'cut' ? 'cut' : 'copy'
+          }
+        })
+        el.clipboardInstance.on('success', (e: any) => {
+          el.successCallback && el.successCallback(e)
+        })
+        el.clipboardInstance.on('error', (e: any) => {
+          el.errorCallback && el.errorCallback(e)
+        })
+        break
     }
-    // 绑定点击事件，就是所谓的一键 copy 啦
-    el.addEventListener('click', el.handler)
   },
-  // 当传进来的值更新的时候触发
-  updated(el: any, { value }: any) {
-    el.$value = value
+  beforeUpdate(el: any, { value, arg }: DirectiveBinding) {
+    switch (arg) {
+      case 'success':
+        el.successCallback = value
+        break
+      case 'error':
+        el.errorCallback = value
+        break
+      default:
+        el.clipboardInstance = new Clipboard(el, {
+          text() {
+            return value
+          },
+          action() {
+            return arg === 'cut' ? 'cut' : 'copy'
+          }
+        })
+        break
+    }
   },
-  // 指令与元素解绑的时候，移除事件绑定
-  unmounted(el: any) {
-    el.removeEventListener('click', el.handler)
+  beforeUnmount(el: any, { arg }: DirectiveBinding) {
+    switch (arg) {
+      case 'success':
+        el.successCallback = null
+        break
+      case 'error':
+        el.errorCallback = null
+        break
+      default:
+        el.clipboardInstance && el.clipboardInstance.destroy()
+        el.clipboardInstance = null
+        break
+    }
   }
 }

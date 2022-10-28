@@ -26,7 +26,7 @@
 <script lang="ts" setup>
 import { computed } from 'vue'
 import { useRouter } from 'vue-router'
-import { ElMessage, ElMessageBox } from 'element-plus'
+import { ElMessage } from 'element-plus'
 import store from '@/store'
 import Hamburger from './Hamburger.vue'
 import Breadcrumb from './Breadcrumb.vue'
@@ -45,17 +45,9 @@ const editPossword = () => {
 }
 
 const loginOut = () => {
-  ElMessageBox.confirm('退出登录', '提示', {
-    confirmButtonText: '确认',
-    cancelButtonText: '取消',
-    type: 'warning'
+  store.dispatch('user/logout').then(() => {
+    router.push('/login')
   })
-    .then(() => {
-      store.dispatch('user/logout').then(() => {
-        router.push('/login')
-      })
-    })
-    .catch(() => {})
 }
 </script>
 

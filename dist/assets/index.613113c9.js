@@ -1,0 +1,1 @@
+import{_ as s}from"./index.98896fb7.js";import{af as a,l as e,m as n,X as t,Q as o,p as r,P as l,T as u}from"./vue.56efbdad.js";import"./element-plus.fb75da24.js";const f={},d=r("h1",null,"菜单",-1);const m=s(f,[["render",function(s,r){const f=a("router-view");return e(),n("div",null,[d,t(f,null,{default:o((({Component:s})=>[(e(),l(u(s)))])),_:1})])}]]);export{m as default};

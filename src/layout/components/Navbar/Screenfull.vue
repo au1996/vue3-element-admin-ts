@@ -1,6 +1,6 @@
 <template>
   <div class="screenfull-box" @click="click">
-    <i class="el-icon-full-screen" />
+    <I name="FullScreen" size="18" />
   </div>
 </template>
 
@@ -58,9 +58,5 @@ export default defineComponent({
   width: 20px;
   margin: 0 10px;
   cursor: pointer;
-}
-
-.el-icon-full-screen {
-  font-size: 20px;
 }
 </style>

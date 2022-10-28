@@ -2,25 +2,25 @@
   <div class="login-wrap">
     <div class="login-content">
       <div class="login-title">系统登录</div>
-      <el-form ref="loginFormRef" class="login-form" :model="param" :rules="rules" status-icon>
+      <el-form ref="loginFormRef" class="login-form" :model="loginForm" :rules="loginFormRules">
         <el-form-item prop="username">
-          <el-input v-model="param.username" clearable placeholder="用户名">
+          <el-input v-model="loginForm.username" clearable placeholder="用户名" size="large">
             <template #prepend>
-              <i class="el-icon-s-custom" />
+              <I name="UserFilled" size="14" />
             </template>
           </el-input>
         </el-form-item>
         <el-form-item prop="password">
           <el-input
-            v-model="param.password"
-            clearable
+            v-model="loginForm.password"
             placeholder="密码"
+            size="large"
             :type="passwordType"
             @keyup.enter="submitForm"
           >
             <template #prepend>
-              <i v-show="passwordLock" class="el-icon-lock" @click="switchPass" />
-              <i v-show="!passwordLock" class="el-icon-unlock" @click="switchPass" />
+              <I v-if="passwordLock" name="Lock" size="14" @click="switchPass" />
+              <I v-else name="Unlock" size="14" @click="switchPass" />
             </template>
           </el-input>
         </el-form-item>
@@ -36,24 +36,23 @@
 
 <script lang="ts" setup>
 import { ref, reactive } from 'vue'
+import { ElMessage, FormInstance } from 'element-plus'
 import { useRouter } from 'vue-router'
 import store from '@/store'
-import { ElMessage } from 'element-plus'
-import { validate } from '@/utils/formExtend'
 
 const router = useRouter()
 
 const btnLoading = ref(false)
-const loginFormRef = ref(null)
 const passwordLock = ref(true)
 const passwordType = ref('password')
 
-const param = reactive({
+const loginFormRef = ref<FormInstance>()
+const loginForm = reactive({
   username: '',
   password: ''
 })
 
-const rules = reactive({
+const loginFormRules = reactive({
   username: [{ required: true, message: '请输入用户名', trigger: 'blur' }],
   password: [{ required: true, message: '请输入密码', trigger: 'blur' }]
 })
@@ -68,21 +67,22 @@ const switchPass = () => {
 }
 
 const submitForm = async () => {
-  const valid = await validate(loginFormRef)
-  if (valid) {
-    btnLoading.value = true
-    // 访问登录接口
-    store
-      .dispatch('user/login', param)
-      .then(() => {
-        router.push('/')
-      })
-      .finally(() => {
-        btnLoading.value = false
-      })
-  } else {
-    ElMessage.error('请输入用户名和密码')
-  }
+  loginFormRef.value?.validate((valid) => {
+    if (valid) {
+      btnLoading.value = true
+      // 访问登录接口
+      store
+        .dispatch('user/login', loginForm)
+        .then(() => {
+          router.push('/')
+        })
+        .finally(() => {
+          btnLoading.value = false
+        })
+    } else {
+      ElMessage.error('请输入用户名和密码')
+    }
+  })
 }
 </script>
 
@@ -92,7 +92,7 @@ const submitForm = async () => {
   width: 100%;
   height: 100%;
   background-color: #235bae;
-  background-image: url(/img/login_bg.jpg);
+  background-image: url('@/assets/img/login_bg.jpg');
   background-size: cover;
 }
 

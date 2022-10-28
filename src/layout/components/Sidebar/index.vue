@@ -1,11 +1,9 @@
 <template>
   <div class="sidebar-container">
     <div class="logo" @click="$router.push('/')">
+      <img class="logo-img" :src="logoUrl" alt="logo" />
       <transition name="fade-transform" mode="out-in">
-        <div class="flex-center">
-          <img class="logo-img" src="/img/logo.png" alt="logo" />
-          <h1 v-show="opened" class="logo-text">Vue Element Admin</h1>
-        </div>
+        <h1 v-show="opened" class="logo-text">Vue Element Admin</h1>
       </transition>
     </div>
     <el-scrollbar wrap-class="scrollbar-wrapper">
@@ -30,6 +28,7 @@ import { reactive, computed, onMounted } from 'vue'
 import store from '@/store'
 import { constantRoutes } from '@/router'
 import { getRoles } from '@/utils/auth'
+import logoUrl from '@/assets/img/logo.png'
 import SidebarItem from './SidebarItem.vue'
 
 const roles = getRoles()
@@ -84,14 +83,14 @@ const filterChildrens = (routers: any) => {
   position: absolute;
   top: 0;
   display: flex;
+  justify-content: center;
+  align-items: center;
   width: 100%;
   height: 50px;
   overflow: hidden;
   text-align: center;
   cursor: pointer;
   background-color: #2b2f3a;
-  justify-content: center;
-  align-items: center;
 
   .logo-img {
     width: 32px;
