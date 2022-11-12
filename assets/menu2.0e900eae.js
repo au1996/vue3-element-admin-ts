@@ -1,1 +1,0 @@
-import{_ as e}from"./index.526568ed.js";import{f as r,h as s}from"./vue.ba1d3062.js";import"./element-plus.0dc63aca.js";const t=e({},[["render",function(e,t){return r(),s("h1",null,"菜单2")}]]);export{t as default};
