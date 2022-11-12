@@ -5,5 +5,5 @@ set -e
 
 # 部署
 git add .
-git commit -m 'refactor: :arrow_up: Upgrade vite version to 3.x'
+git commit -m 'chore: update README'
 git push origin master
