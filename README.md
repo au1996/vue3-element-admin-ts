@@ -61,10 +61,7 @@ npm run lint:css
 
 更多浏览器可以查看 [Can I Use Es Module](https://caniuse.com/?search=ES%20Module)
 
-[在线 Demo](http://admin.xueyueob.cn)
-
-[JavaScript 版本传送门](https://au1996.github.io/vue3-element-admin)
-[JavaScript 版本传送门（国内访问）](https://au1996.gitee.io/vue3-element-admin)
+[JavaScript 版本传送门](https://github.com/au1996/vue3-element-admin)
 
 ## License
 
