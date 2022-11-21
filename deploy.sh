@@ -5,8 +5,5 @@ set -e
 
 # 部署
 git add .
-git commit -m 'chore: update README'
+git commit -m 'feat: add polyfill'
 git push origin webpack
-
-cd -
-

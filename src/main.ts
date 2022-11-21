@@ -1,5 +1,9 @@
 import { createApp, createVNode } from 'vue'
 
+// polyfill
+// import 'core-js'
+// import 'regenerator-runtime/runtime'
+
 // element-plus
 import ElementPlus, { ElIcon } from 'element-plus'
 import 'element-plus/dist/index.css'

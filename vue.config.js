@@ -9,6 +9,7 @@ function resolve(dir) {
 module.exports = {
   lintOnSave: false,
   publicPath: process.env.NODE_ENV === 'development' ? '/' : '/vue3-element-admin-ts/',
+  // transpileDependencies: [/[/\\]node_modules[/\\].*/], // polyfill
   devServer: {
     port: 3001,
     before: require('./mock/mock-server.js'),
