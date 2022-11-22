@@ -1,6 +1,8 @@
 const path = require('path')
 const TerserPlugin = require('terser-webpack-plugin')
 const CompressionPlugin = require('compression-webpack-plugin')
+const SpeedMeasurePlugin = require('speed-measure-webpack-plugin')
+const isProduct = process.env.NODE_ENV === 'production'
 
 function resolve(dir) {
   return path.join(__dirname, dir)
@@ -33,10 +35,14 @@ module.exports = {
     }
   },
   chainWebpack(config) {
-    // 打包分析工具
-    // if (process.env.NODE_ENV === 'production') {
-    //   config.plugin('webpack-bundle-analyzer').use(require('webpack-bundle-analyzer').BundleAnalyzerPlugin)
-    // }
+    if (isProduct) {
+      // 打包loader耗时分析
+      config.plugin('speed').use(SpeedMeasurePlugin)
+      // 打包文件大小分析
+      // config
+      //   .plugin('webpack-bundle-analyzer')
+      //   .use(require('webpack-bundle-analyzer').BundleAnalyzerPlugin)
+    }
     // 别名
     config.resolve.alias.set('@', resolve('src')).set('@img', resolve('src/assets/img'))
     // source-map
@@ -73,8 +79,8 @@ module.exports = {
       // 代码切割
       .splitChunks({
         chunks: 'all', // async对异步引入的代码分割 initial对同步引入代码分割 all对同步异步引入的分割都开启
-        minSize: 30000, // 字节 引入的文件大于30kb才进行分割
-        // maxSize: 80000, // 尝试将大于80kb的文件拆分成n个80kb的文件
+        minSize: 1024 * 30, // 字节 引入的文件大于30kb才进行分割
+        // maxSize: 1024 * 80, // 尝试将大于80kb的文件拆分成n个80kb的文件
         minChunks: 1, // 模块至少使用次数
         maxAsyncRequests: 5, // 同时加载的模块数量最多是5个，只分割出同时引入的前5个文件（按需加载模块）
         maxInitialRequests: 3, // 首页加载的时候引入的文件最多3个（加载初始页面）
@@ -83,23 +89,23 @@ module.exports = {
         cacheGroups: {
           // 缓存组，将所有加载模块放在缓存里面一起分割打包
           vendors: {
-            name: 'chunk-vendors',
+            name: 'vendors',
             test: /[\\/]node_modules[\\/]/,
             priority: 0,
             chunks: 'initial' // only package third parties that are initially dependent
           },
           elementPlus: {
-            name: 'chunk-elementPlus', // split elementPlus into a single package
+            name: 'elementPlus', // split elementPlus into a single package
             priority: 20, // the weight needs to be larger than libs and app or it will be packaged into libs or app
             test: /[\\/]node_modules[\\/]_?element-plus(.*)/ // in order to adapt to cnpm
           },
           echarts: {
-            name: 'chunk-echarts', // split elementUI into a single package
+            name: 'echarts', // split elementUI into a single package
             priority: 20, // the weight needs to be larger than libs and app or it will be packaged into libs or app
             test: /[\\/]node_modules[\\/]_?echarts(.*)/ // in order to adapt to cnpm
           },
           components: {
-            name: 'chunk-components',
+            name: 'components',
             test: path.resolve(__dirname, 'src/components'),
             minChunks: 2, //  minimum common number
             priority: 5,
@@ -111,23 +117,27 @@ module.exports = {
         name: 'runtime'
       })
   },
-  configureWebpack: (config) => {
-    if (process.env.NODE_ENV === 'production') {
-      return {
-        module: {
-          rules: [
-            {
-              test: /\.mjs$/,
-              include: /node_modules/,
-              type: 'javascript/auto'
-            }
-          ]
-        },
+  configureWebpack: () => {
+    const option = {
+      module: {
+        rules: [
+          {
+            test: /\.mjs$/,
+            include: /node_modules/,
+            type: 'javascript/auto'
+          }
+        ]
+      }
+    }
+
+    if (isProduct) {
+      return Object.assign(option, {
         plugins: [
           new CompressionPlugin({
-            test: /\.js$|\.html$|\.css/, // 匹配文件名
+            test: /\.(js|css|html)?$/i, // 匹配文件名
             threshold: 10240, // 对超过10k的数据进行压缩
-            deleteOriginalAssets: false // 是否删除源文件
+            deleteOriginalAssets: false, // 是否删除源文件
+            minRatio: 0.9 // 压缩率小于0.9才会压缩
           }),
           new TerserPlugin({
             cache: true,
@@ -145,19 +155,9 @@ module.exports = {
             }
           })
         ]
-      }
+      })
     } else {
-      return {
-        module: {
-          rules: [
-            {
-              test: /\.mjs$/,
-              include: /node_modules/,
-              type: 'javascript/auto'
-            }
-          ]
-        }
-      }
+      return Object.assign(option, {})
     }
   }
 }

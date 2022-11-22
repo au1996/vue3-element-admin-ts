@@ -5,5 +5,5 @@ set -e
 
 # 部署
 git add .
-git commit -m 'feat: add polyfill'
+git commit -m 'chore: update vue.config.js'
 git push origin webpack
