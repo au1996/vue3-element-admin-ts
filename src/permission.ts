@@ -9,8 +9,8 @@ configure({ showSpinner: false }) // NProgress Configuration
 
 const whiteList = ['/login'] // no redirect whitelist
 
-router.beforeEach(async (to: any, from: any, next) => {
-  console.log('beforeEach: from', from)
+router.beforeEach(async (to: any, _from, next) => {
+  // console.log('beforeEach: from', from)
   // start progress bar
   start()
   // determine whether the user has logged in

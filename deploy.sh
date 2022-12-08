@@ -5,5 +5,5 @@ set -e
 
 # 部署
 git add .
-git commit -m 'chore: update vue.config.js'
+git commit -m 'feat: add china map'
 git push origin webpack
