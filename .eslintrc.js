@@ -23,15 +23,17 @@ module.exports = {
     sourceType: 'module' // 指定源代码存在的位置，script | module，默认为script
   },
   // eslint:recommended:表示引入eslint的核心功能，并且报告一些常见的共同错误。
-  extends: ['eslint:recommended', 'plugin:vue/vue3-recommended'],
-  plugins: ['prettier'],
+  extends: ['eslint:recommended', 'plugin:vue/vue3-recommended', 'plugin:prettier/recommended'],
+  // plugins: ['prettier'],
   rules: {
     'vue/html-self-closing': 0,
     // 设置每行最大属性数
     'vue/max-attributes-per-line': [
       1,
       {
-        singleline: 6, // 标签为单行时，每行最大属性数值为 10，默认值为 1
+        singleline: {
+          max: 10
+        }, // 标签为单行时，每行最大属性数值为 10，默认值为 1
         multiline: {
           max: 1, // 标签为多行时，每行最大属性数字为 1，默认值为 1
           allowFirstLine: false // 不允许属性与该标记名称位于同一行，默认值为 false

@@ -22,7 +22,7 @@
       </el-table-column>
       <el-table-column prop="createTime" label="创建时间" min-width="160">
         <template #default="{ row }">
-          {{ DateFormat(row.createTime) }}
+          {{ $DateFormat(row.createTime) }}
         </template>
       </el-table-column>
       <el-table-column label="操作" width="200">
@@ -64,11 +64,9 @@
       <template #footer>
         <span class="dialog-footer">
           <el-button @click="dialogVisible = false">取 消</el-button>
-          <el-button
-            type="primary"
-            :disabled="formLoading"
-            @click="addOrUpdateUser"
-          >确 定</el-button>
+          <el-button type="primary" :disabled="formLoading" @click="addOrUpdateUser">
+            确 定
+          </el-button>
         </span>
       </template>
     </el-dialog>
@@ -76,11 +74,10 @@
 </template>
 
 <script lang="ts" setup>
-import { ref, reactive, onBeforeMount, inject } from 'vue'
+import { ref, reactive, onBeforeMount } from 'vue'
 import { ElMessageBox, ElMessage } from 'element-plus'
 import { get_user_list, add_user, get_roles, update_user_info, delete_user_info } from '@/api/user'
 
-const DateFormat: any = inject('$DateFormat')
 const dialogFlag = ref(1)
 const dialogVisible = ref(false)
 const tabelLoading = ref(false)

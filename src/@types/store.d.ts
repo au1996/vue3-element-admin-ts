@@ -1,10 +1,12 @@
 import { ComponentCustomProperties } from 'vue'
 import { Store } from 'vuex'
 import { RouteRecordRaw } from 'vue-router'
+import { DateFormat } from './utils/util'
 
 declare module '@vue/runtime-core' {
   interface ComponentCustomProperties {
     $store: Store<State>
+    $DateFormat: DateFormat
   }
 }
 
