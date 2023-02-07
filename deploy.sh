@@ -5,5 +5,5 @@ set -e
 
 # 部署
 git add .
-git commit -m 'feat: add china map'
+git commit -m 'feat: add icon style'
 git push origin webpack

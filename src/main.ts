@@ -48,7 +48,10 @@ const Icon = (props: { name: string; size: number | string; color: string }) => 
     ElIcon,
     {
       size: size || 16,
-      color
+      color,
+      style: {
+        bottom: '-0.125em'
+      }
     },
     () => createVNode(Icons[name as keyof typeof Icons])
   )
