@@ -6,27 +6,27 @@ const userList = [
     password: '123',
     role: 'admin',
     introduction: '管理员',
-    avatar: 'https://www.xueyueob.cn/cube/cube01.bmp',
+    avatar: 'https://www.xyob.top/cube/cube01.bmp',
     email: 'admin@qq.com',
-    createTime: 1623318878699
+    createTime: '2021-06-10 20:41:18'
   },
   {
     username: 'editor',
     password: '456',
     role: 'editor',
     introduction: '搬砖码农',
-    avatar: 'https://www.xueyueob.cn/cube/cube02.bmp',
+    avatar: 'https://www.xyob.top/cube/cube02.bmp',
     email: 'editor@qq.com',
-    createTime: 1623328878699
+    createTime: '2021-06-10 20:41:18'
   },
   {
     username: 'xueyue',
     password: '123456',
     role: 'admin',
     introduction: '否定先生',
-    avatar: 'https://www.xueyueob.cn/icons/favicon.ico',
+    avatar: 'https://www.xyob.top/icons/favicon.ico',
     email: 'xueyue@qq.com',
-    createTime: 1625213469913
+    createTime: '2021-06-10 20:41:18'
   }
 ]
 
@@ -50,7 +50,7 @@ const userMockList: MockMethod[] = [
       })
       if (~flag) {
         const data = {
-          code: 20000,
+          code: 0,
           message: '登录成功',
           token: new Date().getTime().toString(32),
           ...userList[flag]
@@ -69,7 +69,7 @@ const userMockList: MockMethod[] = [
     method: 'get',
     response: ({ query }: any) => {
       return {
-        code: 20000,
+        code: 0,
         message: 'success',
         data: query
       }
@@ -79,12 +79,29 @@ const userMockList: MockMethod[] = [
     url: '/api/users',
     method: 'get',
     timeout: 500,
-    response: () => {
-      const list = userList
+    response: ({ query }: any) => {
+      const { page, page_size, username } = query
+      const allList = userList.filter((item) => item.username === username || !username)
+      const total = allList.length
+      const list = allList.slice((page - 1) * page_size, page * page_size)
       return {
-        code: 20000,
+        code: 0,
         message: 'success',
-        list
+        total,
+        list,
+        query
+      }
+    }
+  },
+  {
+    url: '/api/users',
+    method: 'delete',
+    response: ({ query }: any) => {
+      const { id } = query
+      return {
+        code: 0,
+        message: 'success',
+        data: id
       }
     }
   },
@@ -94,7 +111,7 @@ const userMockList: MockMethod[] = [
     response: () => {
       const list = roleList
       return {
-        code: 20000,
+        code: 0,
         message: 'success',
         list
       }

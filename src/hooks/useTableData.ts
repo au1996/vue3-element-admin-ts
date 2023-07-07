@@ -30,7 +30,7 @@ function useTableData({
     page,
     pageSize,
     pageChange: async (page: number) => {
-      await getTableData()
+      await getTableData(page)
     },
     sizeChange(pageSize: number) {
       pagination.page = 1
@@ -45,7 +45,6 @@ function useTableData({
       ...getTableParams(),
       ...addParams
     }
-
     pagination.page = page || pagination.page
     params[pageName] = pagination.page
     params[pageSizeName] = pagination.pageSize

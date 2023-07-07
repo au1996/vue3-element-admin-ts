@@ -3,4 +3,22 @@
   .el-breadcrumb__inner a {
     font-weight: 400 !important;
   }
+
+  .el-pagination {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 24px;
+
+    &.center {
+      justify-content: center;
+    }
+
+    .custom-total {
+      .iconfont {
+        font-size: 14px;
+        margin-right: 4px;
+        cursor: pointer;
+      }
+    }
+  }
 }

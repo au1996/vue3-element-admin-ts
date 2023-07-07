@@ -69,10 +69,11 @@ export function update_user_info(data: any) {
  * @param {*} id
  * @returns
  */
-export function delete_user_info(id: string) {
+export function delete_user_info(params: any) {
   return request({
-    url: `/api/user/${id}`,
-    method: 'delete'
+    url: `/api/users`,
+    method: 'delete',
+    params
   })
 }
 
