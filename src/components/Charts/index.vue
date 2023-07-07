@@ -1,24 +1,10 @@
 <template>
-  <div ref="echartMain" :style="{ width: width, height: height }">雪月测试</div>
+  <div ref="chartRef" :style="{ width: width, height: height }"></div>
 </template>
 
 <script lang="ts" setup>
-import { defineProps, ref, onMounted, onUnmounted } from 'vue'
-import * as echarts from 'echarts/core'
-import { BarChart, LineChart } from 'echarts/charts'
-import { GridComponent, TitleComponent, TooltipComponent, PolarComponent, LegendComponent } from 'echarts/components'
-import { CanvasRenderer } from 'echarts/renderers'
-
-echarts.use([
-  BarChart,
-  TitleComponent,
-  TooltipComponent,
-  GridComponent,
-  CanvasRenderer,
-  LineChart,
-  PolarComponent,
-  LegendComponent
-])
+import { defineProps, ref, onMounted } from 'vue'
+import useChart from '@/hooks/useChart'
 
 const props = defineProps({
   width: {
@@ -53,20 +39,9 @@ const props = defineProps({
   }
 })
 
-let myChart: any = null
-const echartMain = ref()
+const chartRef = ref()
+const { myChart } = useChart(chartRef)
 onMounted(() => {
-  myChart = echarts.init(echartMain.value)
-  myChart?.setOption(props.eData)
-  window.addEventListener('resize', chartResize)
+  myChart.value?.setOption(props.eData)
 })
-
-onUnmounted(() => {
-  myChart?.dispose()
-  window.removeEventListener('resize', chartResize)
-})
-
-function chartResize() {
-  myChart?.resize()
-}
 </script>
