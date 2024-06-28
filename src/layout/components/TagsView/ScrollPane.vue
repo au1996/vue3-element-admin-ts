@@ -1,5 +1,10 @@
 <template>
-  <el-scrollbar ref="scrollContainer" :vertical="false" class="scroll-container" @wheel.prevent="handleScroll">
+  <el-scrollbar
+    ref="scrollContainer"
+    :vertical="false"
+    class="scroll-container"
+    @wheel.prevent="handleScroll"
+  >
     <slot />
   </el-scrollbar>
 </template>
@@ -24,10 +29,10 @@ export default defineComponent({
     }
   },
   mounted() {
-    this.scrollWrapper.addEventListener('scroll', this.emitScroll, true)
+    this.scrollWrapper?.addEventListener('scroll', this.emitScroll, true)
   },
   beforeUnmount() {
-    this.scrollWrapper.removeEventListener('scroll', this.emitScroll)
+    this.scrollWrapper?.removeEventListener('scroll', this.emitScroll)
   },
   methods: {
     handleScroll(e: any) {
@@ -64,7 +69,8 @@ export default defineComponent({
         const nextTag = tagList[currentIndex + 1]
 
         // the tag's offsetLeft after of nextTag
-        const afterNextTagOffsetLeft = nextTag.offsetLeft + nextTag.offsetWidth + this.tagAndTagSpacing
+        const afterNextTagOffsetLeft =
+          nextTag.offsetLeft + nextTag.offsetWidth + this.tagAndTagSpacing
 
         // the tag's offsetLeft before of prevTag
         const beforePrevTagOffsetLeft = prevTag.offsetLeft - this.tagAndTagSpacing

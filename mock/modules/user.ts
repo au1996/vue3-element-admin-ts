@@ -6,7 +6,7 @@ const userList = [
     password: '123',
     role: 'admin',
     introduction: '管理员',
-    avatar: 'https://www.xyob.top/cube/cube01.bmp',
+    avatar: 'https://www.xyob.cn/cube/cube01.bmp',
     email: 'admin@qq.com',
     createTime: '2021-06-10 20:41:18'
   },
@@ -15,7 +15,7 @@ const userList = [
     password: '456',
     role: 'editor',
     introduction: '搬砖码农',
-    avatar: 'https://www.xyob.top/cube/cube02.bmp',
+    avatar: 'https://www.xyob.cn/cube/cube02.bmp',
     email: 'editor@qq.com',
     createTime: '2021-06-10 20:41:18'
   },
@@ -24,7 +24,7 @@ const userList = [
     password: '123456',
     role: 'admin',
     introduction: '否定先生',
-    avatar: 'https://www.xyob.top/icons/favicon.ico',
+    avatar: 'https://www.xyob.cn/icons/favicon.ico',
     email: 'xueyue@qq.com',
     createTime: '2021-06-10 20:41:18'
   }

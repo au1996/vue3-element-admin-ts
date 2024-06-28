@@ -6,7 +6,7 @@
         <h1 v-show="opened" class="logo-text">Vue Element Admin</h1>
       </transition>
     </div>
-    <el-scrollbar wrap-class="scrollbar-wrapper">
+    <el-scrollbar class="scrollbar-wrapper">
       <el-menu
         :router="true"
         class="v-enter-to"
@@ -52,7 +52,11 @@ const filterRoutes = () => {
     }
   })
   for (let i = 0; i < routerList.length; i++) {
-    if (routerList[i].meta && routerList[i].meta.roles && !routerList[i].meta.roles.includes(roles)) {
+    if (
+      routerList[i].meta &&
+      routerList[i].meta.roles &&
+      !routerList[i].meta.roles.includes(roles)
+    ) {
       routerList.splice(i, 1)
       i--
     }
@@ -66,7 +70,10 @@ const filterRoutes = () => {
 const filterChildrens = (routers: any) => {
   const childrens: Array<any> = []
   routers.forEach((item: any) => {
-    if ((item.meta && !item.meta.roles) || (item.meta && item.meta.roles && item.meta.roles.includes(roles))) {
+    if (
+      (item.meta && !item.meta.roles) ||
+      (item.meta && item.meta.roles && item.meta.roles.includes(roles))
+    ) {
       childrens.push(item)
       if (item.children) {
         filterChildrens(item.children)

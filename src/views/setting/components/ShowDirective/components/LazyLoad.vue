@@ -11,10 +11,10 @@
 </template>
 
 <script lang="ts" setup>
-const url = 'https://www.xueyueob.cn/cube/cube01.bmp'
-const url2 = 'https://www.xueyueob.cn/cube/cube02.bmp'
-const url3 = 'https://www.xueyueob.cn/cube/cube03.bmp'
-const url4 = 'https://www.xueyueob.cn/cube/cube04.bmp'
-const url5 = 'https://www.xueyueob.cn/cube/cube05.bmp'
-const url6 = 'https://www.xueyueob.cn/cube/cube06.bmp'
+const url = 'https://www.xyob.cn/cube/cube01.bmp'
+const url2 = 'https://www.xyob.cn/cube/cube02.bmp'
+const url3 = 'https://www.xyob.cn/cube/cube03.bmp'
+const url4 = 'https://www.xyob.cn/cube/cube04.bmp'
+const url5 = 'https://www.xyob.cn/cube/cube05.bmp'
+const url6 = 'https://www.xyob.cn/cube/cube06.bmp'
 </script>
